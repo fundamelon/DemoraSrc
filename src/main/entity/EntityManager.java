@@ -9,6 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import main.AudioManager;
+import main.GraphicsManager;
 import main.entity.*;
 import main.item.Item;
 
@@ -16,8 +17,6 @@ import main.item.Item;
 public class EntityManager {
 	public static ArrayList<Entity> entityTable = new ArrayList<Entity>();
 	public static ArrayList<Entity> tile_ents = new ArrayList<Entity>();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static ArrayList<Entity> details = new ArrayList<Entity>();
 	public static Entity_cursor cursorEntity = new Entity_cursor();
 	
@@ -28,20 +27,6 @@ public class EntityManager {
 		tile_ents.clear();
 		//	spawn(new Entity_umbrin_test());
 		spawn(cursorEntity);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public static Entity_cursor cursorEntity = new Entity_cursor();
-	
-	public static void init() {
-		try {
-			addToTable(new Entity_player());
-		//	addToTable(new Entity_umbrin_test());
-		//	addToTable(cursorEntity);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 	//	for(Entity e : entityTable) {
 	//		e.init();
@@ -123,7 +108,6 @@ public class EntityManager {
 		}
 		
 		for(int i = 0; i < entityTable.size(); i++) {
-<<<<<<< HEAD
 			Entity e = entityTable.get(i);
 			e.update();
 			if(e instanceof Entity_mobile) {
@@ -136,12 +120,6 @@ public class EntityManager {
 					e_mob.attacked = false;
 				}
 			}
-=======
-			entityTable.get(i).update();
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			
 			if(main.GameBase.debug_entities) {
 				entityTable.get(i).debugDraw(main.GameBase.g);

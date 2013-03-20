@@ -1,21 +1,11 @@
 package main.entity;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
-=======
-import java.awt.Point;
-import java.util.ArrayList;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 import static java.lang.Math.*;
 
 import main.AIManager;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.AudioManager;
 import main.ControlManager;
 import main.GameBase;
@@ -25,25 +15,11 @@ import main.ai.Path;
 import main.ai.Pathfinder_AStar;
 import main.item.Item;
 import main.map.EnvObject;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-import main.ControlManager;
-import main.GameBase;
-import main.Physics;
-import main.ai.Path;
-import main.ai.Pathfinder_AStar;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -53,22 +29,6 @@ import org.lwjgl.util.vector.*;
 
 import util.Timer;
 import util.TimerSet;
-=======
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-
-import org.lwjgl.util.vector.*;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-
-import org.lwjgl.util.vector.*;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import util.Util;
 
 
@@ -85,14 +45,8 @@ public abstract class Entity_mobile implements Entity{
 	protected Image TEX_JUMP_LEFT;
 	protected Image TEX_JUMP_RIGHT;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	protected Image[] TEX_DIE;
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	protected Image[] TEX_RUN_FRONT;
 	protected Image[] TEX_RUN_SIDE;
 	protected Image[] TEX_RUN_BACK;
@@ -128,8 +82,6 @@ public abstract class Entity_mobile implements Entity{
 	protected boolean flipCurImg = false;
 	
 	protected int blockSize, dustCount = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	
 
@@ -137,18 +89,12 @@ public abstract class Entity_mobile implements Entity{
 	protected boolean justDied = false;
 	
 	protected boolean initialized = false;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	protected boolean isMoving = false;
 	protected boolean isColliding = false;
 	protected boolean followingPath = false;
 	protected boolean sprinting = false;
-<<<<<<< HEAD
 	
-<<<<<<< HEAD
 	public boolean attackRequested = false;
 	public boolean canAttack = false;
 	public boolean attacking = false;
@@ -157,11 +103,6 @@ public abstract class Entity_mobile implements Entity{
 	
 	public boolean walkingThroughGrass = false;
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	protected String moveAxis = "x";
 	protected String action = "idle", direction = "front";
 	
@@ -192,33 +133,8 @@ public abstract class Entity_mobile implements Entity{
 	public Timer attackTimer;
 	public int attackDelay = 700;
 	
-<<<<<<< HEAD
 	public float sprintCost = 0.03f;
 	
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public Vector3f pos = new Vector3f(0, 0, 0);
-	public Vector3f vel = new Vector3f(0, 0, 0);
-	public Vector2f dir = new Vector2f(0, 0);
-	public Vector2f imgPos = new Vector2f(0, 0);
-	public Vector2f tilepos = new Vector2f(0, 0);
-
-	public float velMult;
-	public float ang;
-	public float jumpForce = 0.3f;
-	public float stamina = 100f;
-	
-	public float health = 100f;
-	public float maxHealth = 100f;
-	
-	public float sprintCost = 0.03f;
-	
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public float img_offset_x=0, img_offset_y=0;
 	public Vector2f shadow_offset = new Vector2f(0, 0);
 	public String type = "mobile", name = null;
@@ -232,39 +148,25 @@ public abstract class Entity_mobile implements Entity{
 	public int[] itemTable = new int[128];
 	public HashMap<Vector2f, Shape> nearbyTiles;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public void init() {
 		updateBounds();
 		pathfinder = new Pathfinder_AStar(AIManager.getNodeMap());
 		
 		attackTimer = new Timer(name + " attack", attackDelay, false);
-		TimerSet.addTimer(attackTimer);
+	//	TimerSet.addTimer(attackTimer);
 		attackTimer.finish();
 		
 		staminaGrowDelay = new Timer(name + "_stamina_replenish", 1000, false);
-		TimerSet.addTimer(staminaGrowDelay);
+	//	TimerSet.addTimer(staminaGrowDelay);
 		staminaGrowDelay.finish();
 		
 		initialized = true;
-=======
-	public void init() {
-		updateBounds();
-		pathfinder = new Pathfinder_AStar(AIManager.getNodeMap());
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public void init() {
-		updateBounds();
-		pathfinder = new Pathfinder_AStar(AIManager.getNodeMap());
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	};
 	
 	@Override
 	public void draw() {};
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public void debugDraw(Graphics g) {
 	//	g.setFont(new TrueTypeFont(new java.awt.Font("Helvetica", 10, 10), true));
@@ -275,19 +177,6 @@ public abstract class Entity_mobile implements Entity{
 	//	GraphicsManager.drawString("moving:    "+isMoving, pos.x + bounds.getWidth(), pos.y - 30);
 	//	GraphicsManager.drawString("colliding: "+isColliding, pos.x + bounds.getWidth(), pos.y - 30);
 	//	GraphicsManager.drawString("following: "+followingPath, pos.x + bounds.getWidth(), pos.y - 20);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public void debugDraw(Graphics g) {
-	//	g.setFont(new TrueTypeFont(new java.awt.Font("Helvetica", 10, 10), true));
-		g.setColor(org.newdawn.slick.Color.black);
-		g.drawString("moving:    "+isMoving, pos.x + bounds.getWidth(), pos.y - 40);
-		g.drawString("colliding: "+isColliding, pos.x + bounds.getWidth(), pos.y - 30);
-		g.drawString("following: "+followingPath, pos.x + bounds.getWidth(), pos.y - 20);
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public void move(Vector2f newDir) {
@@ -319,22 +208,10 @@ public abstract class Entity_mobile implements Entity{
 			followingPath = false;
 			return;
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		followingPath = true;
 		Vector2f target = new Vector2f((in.nextStep().getX()*GameBase.getMap().getData().getTileWidth() + 16 - pos.x), (in.nextStep().getY()*GameBase.getMap().getData().getTileWidth() + 16 - pos.y));
 		move(target);
 		target = new Vector2f((in.nextStep().getX()*GameBase.getMap().getData().getTileWidth() + 16 - pos.x), (in.nextStep().getY()*GameBase.getMap().getData().getTileWidth() + 16 - pos.y));
-=======
-		Vector2f target = new Vector2f((in.nextStep().getX()*32 - pos.x), (in.nextStep().getY()*32 - pos.y));
-		move(target);
-		target = new Vector2f((in.nextStep().getX()*32 - pos.x), (in.nextStep().getY()*32 - pos.y));
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		Vector2f target = new Vector2f((in.nextStep().getX()*32 - pos.x), (in.nextStep().getY()*32 - pos.y));
-		move(target);
-		target = new Vector2f((in.nextStep().getX()*32 - pos.x), (in.nextStep().getY()*32 - pos.y));
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		float radius = 8;
 		if(target.length() <= radius) {
 			in.nextStep().setVisited(true);
@@ -348,8 +225,6 @@ public abstract class Entity_mobile implements Entity{
 
 	@Override
 	public void update() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if(attackTimer.completed()) {
 			canAttack = true;
 			if(attackRequested) {
@@ -386,114 +261,12 @@ public abstract class Entity_mobile implements Entity{
 				for(int i = 0; i < TEX_FOOTSTEP.length; i++)
 					if(TEX_FOOTSTEP[i].getResourceReference().equals(cur_anim.getCurrentFrame().getResourceReference())) {
 						AudioManager.playSound("footstep", 1f, 0.2f);
-						if(walkingThroughGrass) {
+						
+						if(isSprinting())
+							AudioManager.playSound("footstep_dirt01_02", 1f, 0.03f);
+						
+						if(walkingThroughGrass)
 							AudioManager.playSound("grassy_footstep", 1f, 0.35f);
-						}
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			if(cur_anim != null) {
-				if(isSprinting()) {
-					cur_anim.update((long)(ControlManager.getDelta() * 1.5f));
-				} else {
-					cur_anim.update((long)(ControlManager.getDelta()));
-				}
-			}
-			
-			if(isJumping()) {
-				vel.z -= Physics.gravity * ControlManager.getDelta();
-				if(pos.z + (vel.z) <= 0 && vel.z <= 0) {
-					pos.z = 0;
-					vel.z = 0;
-					if(cur_anim != null && cur_anim.isStopped()) {
-						cur_anim.start();
-						cur_anim.setCurrentFrame((cur_anim.getFrame()+1) % cur_anim.getFrameCount());
-					}
-				} else {
-					setAction("jump");
-				}
-			}
-
-			pos.z += vel.z * ControlManager.getDelta();
-			
-			
-			//skip if not moving
-			if(vel.x == 0 && vel.y == 0 && !isJumping()) {
-				if(isMoving) {
-					isMoving = false; 
-					setAction("idle");
-				}
-			//	return;
-			} else if(!isJumping()) {
-				isMoving = true;
-			//	System.out.println("Moving player, vel.x: "+vel.x+", vel.y:"+vel.y);
-			}
-
-			if(isSprinting() && isMoving()) {
-				float cost = sprintCost * ControlManager.getDelta();
-				if(stamina - cost > 0) {
-					if(!isJumping()) {
-						stamina -= cost;
-					}
-				} else {
-					stamina = 0;
-					stopSprint();
-				}
-			} else {
-				float gain = 0.03f * ControlManager.getDelta();
-				if(stamina + gain < 100) {
-					stamina += gain;
-				} else {
-					stamina = 100;
-				}
-			}
-			
-		//	System.out.println("Velocity x="+vel.x+" y="+vel.y+" z="+vel.z);
-			
-			Vector2f newvel = new Vector2f(vel.x, vel.y);
-			isColliding = false;
-			
-			
-			if(Physics.collisions) {
-				ArrayList<Shape>collisionArray = GameBase.getMap().getNearbyObstacles(this.tilepos.x, this.tilepos.y);
-				for(int i = 0; i < collisionArray.size(); i++) {
-					if(	collisionArray.get(i) == null )
-						continue;
-<<<<<<< HEAD
-					
-					Shape temp_obs = collisionArray.get(i);
-
-					Shape attempted_bounds = getBounds();
-					attempted_bounds.setX(getBounds().getX() + newvel.x * ControlManager.getDelta());
-					attempted_bounds.setY(getBounds().getY() + newvel.y * ControlManager.getDelta());
-					
-=======
-					
-					Shape temp_obs = collisionArray.get(i);
-
-					Shape attempted_bounds = getBounds();
-					attempted_bounds.setX(getBounds().getX() + newvel.x * ControlManager.getDelta());
-					attempted_bounds.setY(getBounds().getY() + newvel.y * ControlManager.getDelta());
-					
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-					int cushion = 0;
-					if(GameBase.getMap().collisionType(i) == 2) {
-						cushion = 1;
-					}
-			
-				//	System.out.println("- - - -");
-					Vector2f impulse = Physics.splitAxisCollision(temp_obs, attempted_bounds);						
-					if(impulse.length() > 0) {
-						isColliding = true;
-				//		System.out.println("Collision detected");
-				//		impulse.scale(1f);
-				//		System.out.println("impulse x="+impulse.x+" y="+impulse.y);
-						newvel.x += impulse.x / ControlManager.getDelta();
-						newvel.y += impulse.y / ControlManager.getDelta();
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 					}
 				
 				last_img = cur_img;
@@ -603,8 +376,6 @@ public abstract class Entity_mobile implements Entity{
 		
 		if(Physics.collisions) {
 			
-<<<<<<< HEAD
-<<<<<<< HEAD
 			ArrayList<Shape>collisionArray = GameBase.getMap().getObstacleArray(this.bounds);
 			
 			//Collisions with map objects
@@ -635,6 +406,10 @@ public abstract class Entity_mobile implements Entity{
 			    	collidedWith.add(EntityManager.entityTable.get(i));
 			}
 			collisionArray.clear();
+		}
+		
+		if(EntityManager.getPlayer().isDead()) {
+			newvel.scale(0);
 		}
 		
 		pos.x += newvel.x * ControlManager.getDelta();
@@ -673,30 +448,6 @@ public abstract class Entity_mobile implements Entity{
 		return false;
 	}
 
-=======
-			
-			pos.x += newvel.x * ControlManager.getDelta();
-			pos.y += newvel.y * ControlManager.getDelta();
-			
-			pos.x = Util.clamp(pos.x, 18, GameBase.getMap().getWidth() * 32 + blockSize + 18);
-			pos.y = Util.clamp(pos.y, 18, GameBase.getMap().getHeight() * 32 + blockSize - 18);
-			
-			updateBounds();
-		}
-	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-			
-			pos.x += newvel.x * ControlManager.getDelta();
-			pos.y += newvel.y * ControlManager.getDelta();
-			
-			pos.x = Util.clamp(pos.x, 18, GameBase.getMap().getWidth() * 32 + blockSize + 18);
-			pos.y = Util.clamp(pos.y, 18, GameBase.getMap().getHeight() * 32 + blockSize - 18);
-			
-			updateBounds();
-		}
-	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public void updateDirection() {
 		// direction controller
@@ -704,17 +455,11 @@ public abstract class Entity_mobile implements Entity{
 			setAction("jump");
 			return;
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if(isDead()) {
 			setAction("die");
 			return;
 		}
 		
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		String newDirection = "";
 		float velDiff = abs(vel.x) - abs(vel.y);
 		if(velDiff > 0.001) {
@@ -724,8 +469,6 @@ public abstract class Entity_mobile implements Entity{
 		}
 		
 		if(vel.length() != 0) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			facing.scale(0f);
 			if(moveAxis.equals("x")) {
 				if(vel.x < 0) {
@@ -737,36 +480,12 @@ public abstract class Entity_mobile implements Entity{
 				}	
 			} else if(moveAxis.equals("y")) {
 				if(vel.y < 0) {
-=======
-			if(moveAxis.equals("x")) {
-				if(vel.x < 0)
-					newDirection = "left";
-				else 
-					newDirection = "right";
-			} else if(moveAxis.equals("y")) {
-				if(vel.y < 0)
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-			if(moveAxis.equals("x")) {
-				if(vel.x < 0)
-					newDirection = "left";
-				else 
-					newDirection = "right";
-			} else if(moveAxis.equals("y")) {
-				if(vel.y < 0)
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 					newDirection = "back";
 					facing.y = -1;
 				} else {
 					newDirection = "front";
-<<<<<<< HEAD
-<<<<<<< HEAD
 					facing.y = 1;
 				}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			}
 			direction = newDirection;
 			setAction("move");
@@ -775,42 +494,20 @@ public abstract class Entity_mobile implements Entity{
 		}
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public void finalize() {
 	//	vel.x *= 0.9;
 	//	vel.y *= 0.9;
-=======
-	public void finalize() {
-		vel.x = 0;
-		vel.y = 0;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public void finalize() {
-		vel.x = 0;
-		vel.y = 0;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	/** Updates the entity's animation or image based on input action and existing direction. */
 	protected void setAction(String newAction) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if(GameBase.paused) 
 			return; 
 		if(animateAttack && !newAction.equals("attack") && cur_anim != null  && !cur_anim.isStopped())
 			return;
 		
 		if(newAction.equals("move")){
-=======
-		if(GameBase.paused) return; 
-		if(newAction == "move"){
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		if(GameBase.paused) return; 
-		if(newAction == "move"){
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			if(direction.equals("left")) {
 				if(cur_anim == null || !cur_anim.equals(ANIM_RUN_LEFT)) {
 					cur_anim = ANIM_RUN_LEFT;
@@ -844,8 +541,6 @@ public abstract class Entity_mobile implements Entity{
 				
 				flipCurImg = false;
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		} 
 		
 		else if(newAction.equals("attack")) {
@@ -935,43 +630,6 @@ public abstract class Entity_mobile implements Entity{
 				}
 				flipCurImg = false;
 			}
-=======
-		} else if(newAction == "jump"){
-			if(cur_anim != null && !cur_anim.isStopped()) cur_anim.stop();
-		} else if(newAction == "idle") {
-			if(cur_anim != null && !cur_anim.isStopped()) cur_anim.stop();
-=======
-		} else if(newAction == "jump"){
-			if(cur_anim != null && !cur_anim.isStopped()) cur_anim.stop();
-		} else if(newAction == "idle") {
-			if(cur_anim != null && !cur_anim.isStopped()) cur_anim.stop();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			if(cur_anim == ANIM_RUN_LEFT) {
-				cur_anim = null;
-				cur_img = TEX_LEFT;
-				
-				flipCurImg = false;
-			} else if(cur_anim == ANIM_RUN_RIGHT) {
-				cur_anim = null;
-				cur_img = TEX_RIGHT;
-				
-				flipCurImg = false;
-			} else if(cur_anim == ANIM_RUN_BACK) {
-				cur_anim = null;
-				cur_img = TEX_BACK;
-				
-				flipCurImg = false;
-			} else if(cur_anim == ANIM_RUN_FRONT) {
-				cur_anim = null;
-				cur_img = TEX_FRONT;
-				
-				flipCurImg = false;
-			}
-		//	System.out.println("Set action to idle");
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		} else
 			System.out.println("Invalid action: \""+newAction+"\"");
 		
@@ -988,8 +646,6 @@ public abstract class Entity_mobile implements Entity{
 	}
 
 	public void updateBounds() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		bounds.setLocation(pos.x - getBounds().getWidth()/2, pos.y - getBounds().getHeight()/2);
 		tilepos.x = GameBase.getMap().getTileAtX(pos.x);
 		tilepos.y = GameBase.getMap().getTileAtY(pos.y);
@@ -1011,41 +667,23 @@ public abstract class Entity_mobile implements Entity{
 	public HashMap<Vector2f, Shape> getNearbyTiles() {
 		return nearbyTiles;
 	}
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		bounds.setLocation(pos.x - getBounds().getWidth()/2, pos.y + getBounds().getHeight()/2);
-		tilepos.x = GameBase.getMap().getTileAtX(pos.x);
-		tilepos.y = GameBase.getMap().getTileAtY(pos.y);
-	}
-	
-	public void damage() {}
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	@Override
 	public void damage(float dmg) {
 		this.health -= dmg;
 	}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	@Override
 	public String getType() {
 		return type;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public String getName() {
 		return name;
 	}
 	
 	
-<<<<<<< HEAD
 	public Vector3f pos() {
 		return pos;
 	}
@@ -1060,26 +698,6 @@ public abstract class Entity_mobile implements Entity{
 	public float getY() {return pos.y;}
 	public float getZ() {return pos.z;}
 	
-=======
-	public String getName() {
-		return name;
-	}
-	
-	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public Vector pos() {
-		return pos;
-	}
-
-	public float getX() {return pos.x;}
-	public float getY() {return pos.y;}
-	public float getZ() {return pos.z;}
-	
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public Vector getImgPos() {
 		return imgPos;
 	}
@@ -1129,14 +747,6 @@ public abstract class Entity_mobile implements Entity{
 	public Shape getAttackArea() {
 		return attackArea;
 	}
-	
-	public Path getCurrentPath() {
-		return currentPath;
-	}
-	
-	public Path getCurrentPath() {
-		return currentPath;
-	}
 
 	public void setVelZ(float newVel) {
 		vel.z = newVel;
@@ -1145,9 +755,7 @@ public abstract class Entity_mobile implements Entity{
 	@Override
 	public boolean isJumping() {
 		return (pos.z == 0 && vel.z == 0) ? false : true;
-<<<<<<< HEAD
 	}
-<<<<<<< HEAD
 	
 	public boolean isFollowingPath() {
 		return followingPath;
@@ -1179,15 +787,7 @@ public abstract class Entity_mobile implements Entity{
 	public int getAttackType() {
 		//TODO
 		return 0;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
-=======
-
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public void startSprint() {
 		if(stamina > 0 && !isJumping()) {
@@ -1207,31 +807,17 @@ public abstract class Entity_mobile implements Entity{
 		return stamina / 100;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean hasCollisions() {
 		return true;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean isMoving() {
 		return isMoving;
 	}
 	
 	public void jump() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		jump(jumpForce);
 	}
 	
@@ -1268,33 +854,6 @@ public abstract class Entity_mobile implements Entity{
 	@Override
 	public boolean initialized() {
 		return initialized;
-=======
-		if(!isJumping()) {
-			this.vel.z += jumpForce;
-		}
 	}
-	
-	public float getHealth() {
-		return health;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	}
-	
-=======
-		if(!isJumping()) {
-			this.vel.z += jumpForce;
-		}
-	}
-	
-	public float getHealth() {
-		return health;
-	}
-	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public float getTotalHealth() {
-		return maxHealth;
-	}
-	
-	public void drawFgEffects() {}
-	public void drawBgEffects() {}
 
 }

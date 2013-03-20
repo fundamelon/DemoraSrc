@@ -1,14 +1,9 @@
 package main;
 
 import main.entity.*;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.graphics.FontLoader;
 import main.graphics.ImageLoader;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+import main.graphics.ScreenMessage;
 import main.gui.*;
 import main.map.*;
 import util.*;
@@ -29,35 +24,15 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.EXTFramebufferObject.*;
 
 import org.newdawn.slick.*;
-<<<<<<< HEAD
 import org.newdawn.slick.geom.Rectangle;
 import util.Lagmeter;
-=======
-import org.newdawn.slick.opengl.*;
-import org.newdawn.slick.openal.*;
-
-import util.Lagmeter;
-
-import Dario.*;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
  
 public class GameBase {
 	
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private static GameMap currentMap;
 	private static String mapPath = "lib/map/graphics_test.tmx";
 	private static String bgPath = "lib/map/menubg_01.tmx";
-=======
-	private static Tilemap currentMap;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	private static Tilemap currentMap;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 	/** Current game render mode.
 	 * 0: menu,
@@ -73,28 +48,22 @@ public class GameBase {
 	public static boolean closeRequested = false;
 	
 	//Debug switches, toggle console reporting and/or display modes.
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public static boolean debug = true;
-	public static boolean debug_text = false;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+	public static boolean debug 		= 	true;
+	public static boolean debug_text 	= 	false;
 	public static boolean debug_keyboard = 	false;
-	public static boolean debug_mouse = 	false;
+	public static boolean debug_mouse 	= 	false;
 	public static boolean debug_graphics = 	false;
-	public static boolean debug_menu = 		false;
+	public static boolean debug_menu 	=	false;
 	public static boolean debug_tileUtil = 	false;
 	public static boolean debug_animation = false;
 	public static boolean debug_pathfinder= true;
 	public static boolean debug_entities  = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static boolean debug_AI 		= 	false;
 	public static boolean debug_particles = false;
 	public static boolean debug_lwjgl 	= 	false;
 	public static boolean debug_audio =		false;
+	
+	public static float gamma = 0.6f;
 
 	//debug option for easy map visibility toggle
 	public static boolean mapRendering = true;
@@ -105,10 +74,6 @@ public class GameBase {
 	public static String classpath = System.getProperty("java.class.path");
 	
 	public static String version = "0.1x";
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public static Graphics g;
 	
@@ -139,21 +104,12 @@ public class GameBase {
 	
 	private static boolean disableFBO = true;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static Font debugFont;
 	
 	private static Image loadbar_decor;
 	
 	public static PerformanceMonitor cpuMonitor = new PerformanceMonitor();
 	public static float cpu;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-
-	//debug option for easy map visibility toggle
-	public static boolean mapRendering = true;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public static void main(String[] args) {
 		GameBase.start();
@@ -161,8 +117,6 @@ public class GameBase {
 	
 	@SuppressWarnings("all")
 	public static void start() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		System.out.println("[Demora v. "+version+"]");
 		System.out.println("--------------------");
 		
@@ -174,12 +128,6 @@ public class GameBase {
 		
 		System.setProperty("org.lwjgl.opengl.Window.undecorated", "false");
 		
-=======
-		System.out.println("//--------------------");
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		System.out.println("//--------------------");
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		try {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.destroy();
@@ -188,8 +136,6 @@ public class GameBase {
 			e.printStackTrace();
 			System.exit(0);
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		Display.setTitle("Demora");
 		
@@ -212,33 +158,11 @@ public class GameBase {
 		
 		System.out.println("--------------------");
 		System.out.println("Game directory: " + System.getProperties().getProperty("user.dir"));
-=======
-
 		
-=======
-
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		System.out.println(glGetString(GL_VENDOR));
-		System.out.println(glGetString(GL11.GL_RENDERER));
-		System.out.println("OpenGL "+glGetString(GL_VERSION));
-		System.out.println("//--------------------");
-		
-		g = new Graphics();
-		
-		//Temporary stub to load map
-		loadMap(new Tilemap("lib/map/graphics_testbed.tmx"));
-		System.out.println("Map loaded: "+getMap().getFilepath());
-		AIManager.generateNodeMap(32, 256, 256);
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-		org.newdawn.slick.util.Log.setVerbose(true);
+		org.newdawn.slick.util.Log.setVerbose(false);
 		
 		
 		g = new Graphics();
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 		g.setFont(new TrueTypeFont(new java.awt.Font("Helvetica", 0, 10), true));
 		debugFont =  new TrueTypeFont(new java.awt.Font("Courier", 0, 10), true);
@@ -285,8 +209,6 @@ public class GameBase {
 		updateProgressBar("Loading AI.", 0.90f);
 		
 		GUIManager.init();
-<<<<<<< HEAD
-<<<<<<< HEAD
 		updateProgressBar("Loading GUI.", 0.95f);
 		
 		updateProgressBar("Loaded.", 1f);
@@ -306,38 +228,10 @@ public class GameBase {
 		
 		startTime = System.currentTimeMillis();
 		
-=======
-		Lagmeter.update(); //Required on first run to fix bugs.
-		
-	//	testQT = new QuadTree();
-	//	testQT.init();
-		
-		g.setFont(new TrueTypeFont(new java.awt.Font("Helvetica", 10, 10), true));
-		g.setAntiAlias(false);
-		initGL();
-		
-		GraphicsManager.setDebugMode(debug_graphics);
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		Lagmeter.update(); //Required on first run to fix bugs.
-		
-	//	testQT = new QuadTree();
-	//	testQT.init();
-		
-		g.setFont(new TrueTypeFont(new java.awt.Font("Helvetica", 10, 10), true));
-		g.setAntiAlias(false);
-		initGL();
-		
-		GraphicsManager.setDebugMode(debug_graphics);
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
 
 		while (!Display.isCloseRequested() && !closeRequested) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			float delta = getDelta() * 1f;
 			if(paused) delta = 0;
 
@@ -346,25 +240,12 @@ public class GameBase {
 		//	testQT.scanEntities(EntityManager.entityTable);
 			gameTime += delta;
 			preRender();
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			float delta = getDelta();
-			if(paused) delta = 0;
-
-			Display.setTitle("Demora (Testbed) FPS: " + thisFPS + "  Particles: "+GraphicsManager.getParticleCount());
-
-		//	testQT.scanEntities(EntityManager.entityTable);
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			update(delta);
 			render(g, delta);
 
 			Display.update();
 			g.clear();
-			Display.sync(100); // cap fps
+			Display.sync(30); // cap fps
 		}
 		System.out.println("Closing game...");
 		AL.destroy();
@@ -374,31 +255,16 @@ public class GameBase {
 	public static void update(float delta) {
 		ControlManager.update(delta);
 		TransitionManager.updateAll();
-<<<<<<< HEAD
-<<<<<<< HEAD
 		EntityManager.update();
 		TimerSet.updateAll();
 		AudioManager.update();
 		EnvObject.updateAll();
 		getMap().update();
-=======
-		TimerSet.updateAll();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		TimerSet.updateAll();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+		ScreenMessage.updateAll();
+		GUIManager.update();
 		
-		if(viewMode == VIEW_MENU) {
-			GUIManager.update();
-		} else if(viewMode == VIEW_WORLD) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+		if(viewMode == VIEW_WORLD) {
 			
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			EntityManager.update();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		} 
 		
 		if(!paused) {
@@ -407,8 +273,6 @@ public class GameBase {
 		
 		updateFPS(); // update FPS Counter
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	public static void updateProgressBar(String text, float amt) {
 		g.clear();
@@ -419,31 +283,27 @@ public class GameBase {
 		g.setColor(Color.lightGray);
 
 		g.setAntiAlias(true);
-		g.drawString(text, mw - 100, mh - 20);
-		g.setAntiAlias(false);
 		
+		g.drawString(text, mw - 100, mh - 20);
+		
+		g.setColor(Color.darkGray);
+		g.drawString((((int)(amt*1000))/10f)+"%", mw + 105, mh-10);
+		
+		g.setAntiAlias(false);
+
+		g.setColor(Color.lightGray);
 		g.fill(new Rectangle(mw - 100, mh - 5, amt*200, 10));
 		
 		Display.update();
 	}
 	
 	public static void preRender() {
-=======
-
-	public static void render(Graphics g, float delta) {	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-
-	public static void render(Graphics g, float delta) {	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		if(!disableFBO && GLContext.getCapabilities().GL_EXT_framebuffer_object) {
 			glViewport(0, 0, Display.getWidth(), Display.getHeight());
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebufferID);
 		}
 			
-<<<<<<< HEAD
-<<<<<<< HEAD
 		glClearColor (0.0f, 0.0f, 0.0f, 1f);
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
@@ -454,31 +314,13 @@ public class GameBase {
 		case VIEW_MENU:
 			g.setDrawMode(Graphics.MODE_NORMAL);
 			GraphicsManager.renderMenuBackground(g);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		glClearColor (0.0f, 0.0f, 0.0f, 0.1f);
-		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		switch(viewMode) {
-		case VIEW_MENU:
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			menuVisible = true;
 			break;
 			
 		case VIEW_WORLD:
 	        g.setDrawMode(Graphics.MODE_NORMAL);
 			GraphicsManager.renderGame(g, delta);
-<<<<<<< HEAD
-<<<<<<< HEAD
 			AIManager.render(g);
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			if(menuVisible) {
 				GraphicsManager.renderMenuOverlay(g);
 				paused = true;
@@ -495,16 +337,16 @@ public class GameBase {
 		if(menuVisible) {
 			GUIManager.render(g, delta);
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 		Mouse.setGrabbed(!menuVisible);
-=======
 		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
+		if(gamma < 0.6f) {
+			g.setColor(new Color(0f, 0f, 0f, 1 - (gamma+0.4f)));
+		} else {
+			g.setColor(new Color(1f, 1f, 1f, gamma-0.6f));
+		}
+		g.fillRect(0, 0, getWidth(), getHeight());
 		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		Lagmeter.render(g);
 		
 	//	testQT.draw();
@@ -519,18 +361,6 @@ public class GameBase {
 			glDisable(GL_TEXTURE_2D);
 			glFlush();
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		
-		
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		
-		
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public static void setDisplayMode(int width, int height, boolean fullscreen) {
@@ -693,8 +523,6 @@ public class GameBase {
 	
 	public static int getWidth() {
 		return Display.getWidth();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	}
 	
 	public static int getHeight() {
@@ -713,6 +541,10 @@ public class GameBase {
 	}
 	
 	public static void loadMap(GameMap newMap) throws SlickException {
+		GraphicsManager.init();
+		ControlManager.init();
+		AIManager.init();
+		EntityManager.init();
 		currentMap = newMap;
 		currentMap.init();
 		EntityManager.playerSpawned = false;
@@ -723,48 +555,21 @@ public class GameBase {
 			AudioManager.addAmbience("birdchirp", 0.2f, 0.15f);
 		}
 		AIManager.generateNodeMap(currentMap.getData().getTileHeight(), currentMap.getWidth(), currentMap.getHeight());
+		GraphicsManager.setFadeVal(1f);
+		GraphicsManager.setFade(true);
 		System.out.println("Map loaded: "+getMap().getFilepath());
-		
 	}
 	
 	public static void loadMap(String path) throws SlickException {
 		loadMap(new GameMap(path));
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public static String getCurrentBackground() {
 		return bgPath;
 	}
 	
-<<<<<<< HEAD
 	public static String getCurrentMap() {
 		return mapPath;
-=======
-	public static void toggleIngameMenu() {
-		if(viewMode != VIEW_MENU) {
-			menuVisible = !menuVisible;
-		}
-	}
-	
-<<<<<<< HEAD
-	public static void loadMap(Tilemap newMap) {
-		currentMap = newMap;
-		currentMap.init();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public static void toggleIngameMenu() {
-		if(viewMode != VIEW_MENU) {
-			menuVisible = !menuVisible;
-		}
-	}
-	
-	public static void loadMap(Tilemap newMap) {
-		currentMap = newMap;
-		currentMap.init();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public static int createVBOID() {
@@ -790,15 +595,7 @@ public class GameBase {
 		  }
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static GameMap getMap() {
-=======
-	public static Tilemap getMap() {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public static Tilemap getMap() {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		return currentMap;
 	}
 	
@@ -813,8 +610,6 @@ public class GameBase {
 	}
 
 	public static String getVersion() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		return version;
 	}
 	
@@ -828,17 +623,5 @@ public class GameBase {
 
 	public static long gameTime() {
 		return gameTime;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		return "0.0x";
-	}
-	
-	public static boolean isInGame() {
-		return viewMode == VIEW_WORLD;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 }

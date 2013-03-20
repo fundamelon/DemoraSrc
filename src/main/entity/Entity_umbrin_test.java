@@ -3,44 +3,55 @@ package main.entity;
 import java.util.ArrayList;
 
 import main.AudioManager;
+import main.Camera;
 import main.ControlManager;
 import main.GameBase;
+import main.GraphicsManager;
+import main.graphics.ImageLoader;
 import main.particles.*;
 import main.particles.ParticleEmitter;
 import main.particles.ParticleSystem;
 
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.particles.*;
 
-import util.Util;
+import util.*;
 
 @SuppressWarnings("all")
 public class Entity_umbrin_test extends Entity_mobile implements Entity {
 	
 	public ParticleSystem particles_smoke, ps_hit;
+	public float angleToTarget;
+	public float targetDistance;
+	Entity_player target;
+	private Timer attackCharge;
+	private float charge = 1f;
+	private boolean following = false;
+	private Vector2f dir = new Vector2f(), newDir = new Vector2f();
+	
 	ArrayList<Emitter_UmbrinSmoke_3> followSmoke = new ArrayList<Emitter_UmbrinSmoke_3>();
 	
 	public Entity_umbrin_test() throws SlickException {
-		TEX_FRONT = new Image("lib/img/char/umbrin_0/umbrin_front_static.png");
-		TEX_BACK = new Image("lib/img/char/umbrin_0/umbrin_back_static.png");
-		TEX_LEFT = new Image("lib/img/char/umbrin_0/umbrin_left_static.png");
-		TEX_RIGHT = new Image("lib/img/char/umbrin_0/umbrin_right_static.png");
+		TEX_FRONT = ImageLoader.getByPath("lib/img/char/umbrin_0/umbrin_front_static.png");
+		TEX_BACK = ImageLoader.getByPath("lib/img/char/umbrin_0/umbrin_back_static.png");
+		TEX_LEFT = ImageLoader.getByPath("lib/img/char/umbrin_0/umbrin_left_static.png");
+		TEX_RIGHT = ImageLoader.getByPath("lib/img/char/umbrin_0/umbrin_right_static.png");
 		
 		cur_img = TEX_FRONT;
 		
+		
 		bounds = new Rectangle(0, 0, 32, 32);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 		
-		particles_smoke = new ParticleSystem(new Image("lib/img/particle/flamelrg_02.tga"));
+		particles_smoke = new ParticleSystem(ImageLoader.getByPath("lib/img/particle/flamelrg_02.tga"));
 		particles_smoke.setPosition(0, 0);
 		particles_smoke.setBlendingMode(ParticleSystem.BLEND_COMBINE);
 		
 		
-		ps_hit = new ParticleSystem(new Image("lib/img/particle/flamelrg_02.tga"));
+		ps_hit = new ParticleSystem(ImageLoader.getByPath("lib/img/particle/flamelrg_02.tga"));
 		ps_hit.setPosition(0, 0);
 		ps_hit.setBlendingMode(ParticleSystem.BLEND_COMBINE);
 	//	particles_smoke.getEmitter(0).setEnabled(false);
@@ -64,7 +75,7 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 		
 		super.init();
 		
-		AudioManager.playSound("eerie_shriek", 1f, 0.6f);
+		AudioManager.playSound("eerie_explode02", 1f, 0.6f);
 		
 		for(int i = 0; i < 5; i++) {
 			particles_smoke.addEmitter(new Emitter_UmbrinSmoke_1(this.pos.x, this.pos.y, this.pos.z));
@@ -78,22 +89,6 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 			followSmoke.get(i).setPos(this.getBounds().getCenterX(), this.getBounds().getCenterY(), pos.z);
 			followSmoke.get(i).setEnabled(true);
 		} 
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	}
-	
-	public void init(int nx, int ny, boolean tilewise) {
-		pos.x = nx;
-		pos.y = ny;
-		updateBounds();
-		
-		velMult = 0.5f;
-		
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 		System.out.println("ENT: umbrin test initialized");
 	}
@@ -103,20 +98,115 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 	}
 	
 	public void update() {
-<<<<<<< HEAD
-<<<<<<< HEAD
+		target = EntityManager.getPlayer();
+		targetDistance = Util.getDistance(this, target);
 		pos.z = 10 + (float)Math.sin(GameBase.gameTime() *0.002f)*10f;
 		img_offset_y = -50 - pos.z;
 		
-		vel.x += (EntityManager.getPlayer().getX() - pos.x) * ControlManager.getDelta() * 0.00001f;
-		vel.y += (EntityManager.getPlayer().getY() - pos.y) * ControlManager.getDelta() * 0.00001f;
+		if(attackCharge == null && charge == 1f) {
+			//normal movement
+			newDir.x = (target.getX() - pos.x);
+			newDir.y = (target.getY() - pos.y);
+			newDir.normalise();
+
+			dir.x += newDir.x * 0.01f * ControlManager.getDelta();
+			dir.y += newDir.y * 0.01f * ControlManager.getDelta();
+			dir.normalise();
+		}
 		
+		if(!following) dir.scale(0);
+		
+		vel.x = dir.x;
+		vel.y = dir.y;
+		
+		
+		vel.scale(ControlManager.getDelta() * 0.007f);
+	//	System.out.println(vel);
+	//	System.out.println(charge);
+		
+		if(charge != 1f) {
+			vel.scale(charge);
+		}
+		
+		if(attackCharge != null) {
+			//charging
+			vel.scale(0f);
+		//	float scale = (attackCharge.totalTime() - attackCharge.timeElapsed()) / attackCharge.totalTime();
+		//	vel.x = (float)(Math.random() * ControlManager.getDelta()) * 0.001f * scale;
+		//	vel.y = (float)(Math.random() * ControlManager.getDelta()) * 0.001f * scale;
+		}
 
 		for(ParticleEmitter p : followSmoke) {
 			p.setPos(
 					this.getBounds().getCenterX() - this.facing.x*5, 
 					this.getBounds().getCenterY(), 
 					pos.z);
+		}
+		
+		if(!isDead) {
+			if(targetDistance < 250) following = true;
+			
+			if(targetDistance > 600) following = false;
+			
+			if(targetDistance < 175) {
+				Camera.setShake(true);
+				if(attackCharge == null && charge == 1f) {
+					AudioManager.playSound("eerie_buildup_short", 1f, 0.3f);
+					attackCharge = new util.Timer("umbrin_attack", 700);
+					attackCharge.start();
+				}
+			} else Camera.setShake(false);
+			
+			if(targetDistance < 50) {
+				//damage
+				if(charge != 1f && !target.isDead()) {
+					AudioManager.stopSound("eerie_buildup_short");
+					AudioManager.stopSound("eerie_flyby");
+					AudioManager.playSound("eerie_hit_huge", 1f, 0.9f);
+					target.damage(10, this);
+					charge = 2f;
+					vel.x += (this.pos.x - target.pos.x) * 0.01f;
+					vel.y += (this.pos.y - target.pos.y) * 0.01f;
+		
+					target.vel.x += (target.pos.x - this.pos.x) * 0.1f;
+					target.vel.y += (target.pos.y - this.pos.y) * 0.1f;
+				}
+			}
+			
+			if(attackCharge != null && attackCharge.completed()) {
+				//rush forward
+				AudioManager.playSound("eerie_flyby", 1f, 0.3f);
+				attackCharge = null;
+				charge = 6f;
+				dir.x = (target.getX() - pos.x);
+				dir.y = (target.getY() - pos.y);
+				dir.normalise();
+			}
+			float chargeDecrease = ControlManager.getDelta() * 0.008f;
+			if(charge - chargeDecrease > 1f) {
+				charge -= chargeDecrease;
+			} else {
+				charge = 1f;
+			}
+
+			
+			if(targetDistance < 250) {
+				GraphicsManager.overlayAlphas[2] = ((250 - targetDistance) / 250) * (float)Math.pow((float)Math.sin(GameBase.runningTime() * 0.004f)*0.15f + 0.6f, 2);
+			} else GraphicsManager.overlayAlphas[2] = 0;
+			if(targetDistance < 300) {
+				GraphicsManager.overlayAlphas[3] = ((300 - targetDistance) / 300) * (float)Math.pow((float)Math.sin(GameBase.runningTime() * 0.006f)*0.15f + 0.8f, 2);
+			} else GraphicsManager.overlayAlphas[3] = 0;
+		} else {
+			Camera.setShake(false);
+			if(GraphicsManager.overlayAlphas[2] > 0f) 
+				GraphicsManager.overlayAlphas[2] -= ControlManager.getDelta() * 0.0001f; 
+			else 
+				GraphicsManager.overlayAlphas[2] = 0f;
+			
+			if(GraphicsManager.overlayAlphas[3] > 0f) 
+				GraphicsManager.overlayAlphas[3] -= ControlManager.getDelta() * 0.0001f; 
+			else 
+				GraphicsManager.overlayAlphas[3] = 0f;
 		}
 		
 		particles_smoke.update((int)ControlManager.getDelta());
@@ -150,32 +240,12 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 				for(ParticleEmitter p : followSmoke)
 					p.setEnabled(false);
 				
-				AudioManager.playSound("eerie_burst_voices", 1f, 0.2f);
-				AudioManager.playSound("hit_electric_hard_01", 1f, 0.7f);
+				AudioManager.playSound("eerie_bust_thunder", 1f, 1f);
+			//	AudioManager.playSound("hit_electric_hard_01", 1f, 0.7f);
 			}
 			bounds = new Rectangle(0, 0, 0, 0);
 			
 		} else if(vel.x > 0 && vel.x > Math.abs(vel.y)) {
-=======
-		super.pos.z = (float)Math.sin((System.currentTimeMillis()) *0.002)*8 - 25;
-		
-		vel.x = (EntityManager.getPlayer().getX() - pos.x) * 0.01f;
-		vel.y = (EntityManager.getPlayer().getY() - pos.y) * 0.01f;
-		
-		super.update();
-		
-		if(vel.x > 0 && vel.x > Math.abs(vel.y)) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		super.pos.z = (float)Math.sin((System.currentTimeMillis()) *0.002)*8 - 25;
-		
-		vel.x = (EntityManager.getPlayer().getX() - pos.x) * 0.01f;
-		vel.y = (EntityManager.getPlayer().getY() - pos.y) * 0.01f;
-		
-		super.update();
-		
-		if(vel.x > 0 && vel.x > Math.abs(vel.y)) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			cur_img = TEX_RIGHT.copy();
 			facing.x = 1;
 			facing.y = 0;
@@ -195,32 +265,19 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 			facing.y = 1;
 		}
 		super.finalize();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		super.updateBounds();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		super.updateBounds();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 	//	move(pos.x, pos.y);
 	}
 	
-<<<<<<< HEAD
 	public void damage(float damage, Entity attacker) {
+		attackCharge = null;
+		AudioManager.stopSound("eerie_flyby");
+		AudioManager.stopSound("eerie_buildup_short");
+		AudioManager.playSound("eerie_hit01", 1f, 0.9f);
 		ps_hit.addEmitter(new Emitter_UmbrinHit(this.pos.x, this.pos.y, this.pos.z));
 		((main.particles.ParticleEmitter)ps_hit.getEmitter(ps_hit.getEmitterCount()-1)).setPos(
 				this.getBounds().getCenterX(), this.getBounds().getCenterY());
 		super.damage(damage, attacker);
-=======
-	public void updateBounds() {
-		bounds.setX(pos.x - getBounds().getWidth()/2);
-		bounds.setY(pos.y + getBounds().getHeight()/2);
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	@Override
@@ -228,6 +285,7 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 	public Rectangle getBounds() {
 		return bounds;
@@ -248,16 +306,10 @@ public class Entity_umbrin_test extends Entity_mobile implements Entity {
 
 	public float getY() {
 		return pos.y;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	}
 
 	public void drawFgEffects() {
 		particles_smoke.render();
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 
 	@Override

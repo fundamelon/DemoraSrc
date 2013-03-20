@@ -7,26 +7,13 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.graphics.*;
 import main.item.Coin;
 import main.item.Item;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import main.ai.*;
 import main.entity.*;
 import main.map.*;
 import main.particles.*;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.*;
@@ -38,18 +25,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-<<<<<<< HEAD
 import org.newdawn.slick.geom.Shape;
-import util.Util;
-=======
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.particles.*;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
-import util.Util;
-
+import util.Transition;
 import util.Util;
 
 public class GraphicsManager {
@@ -62,18 +40,17 @@ public class GraphicsManager {
 	private static int sparkct = 0, particle_count = 0;
 	public static boolean first_run = true;
 	
-	private static Color fadeCol = new Color(0, 0, 0);
-	private static Color overlayCol = new Color(fadeCol.getRed(), fadeCol.getGreen(), fadeCol.getBlue(), 0);
-<<<<<<< HEAD
-<<<<<<< HEAD
+	private static float fadeVal = 0f;
 	
-=======
-	//Vars with preceding underscore are to be values for render options.  :O
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	//Vars with preceding underscore are to be values for render options.  :O
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+	private static Color fadeCol = new Color(0, 0, 0);
+	private static Color overlayCol = new Color(fadeCol.getRed(), fadeCol.getGreen(), fadeCol.getBlue(), 0.5f);
+	
+	private static float redFlashVal = 0f;
+	
 	private static boolean fadeMode = false, helperText = false, shake = false;
+	
+	public static float[] overlayAlphas = new float[16];
+	public static Image[] overlayImages = new Image[16];
 	
 	static Pathfinder_AStar pathfinderTest = new Pathfinder_AStar(AIManager.getNodeMap());
 	
@@ -84,19 +61,11 @@ public class GraphicsManager {
 	
 	private static SparkEmitter sparktest = new SparkEmitter_FireMed();
 	
-<<<<<<< HEAD
 	public static ArrayList<RenderCandidate> renderQueue = new ArrayList<RenderCandidate>();
 	
 	
-<<<<<<< HEAD
 	public static Image alphaMap;
 	public static Image post_lighting;
-=======
-	private static SparkEmitter sparktest = new SparkEmitter();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	private static SparkEmitter sparktest = new SparkEmitter();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	/**
 	 * Initialize state
@@ -115,42 +84,18 @@ public class GraphicsManager {
 		particle_system_magic.setBlendingMode(ParticleSystem.BLEND_ADDITIVE);
 		
 		
-<<<<<<< HEAD
-=======
-		try {
-			grassblade_tex0 = new Image("lib/img/tilesets/individual/grass_blade0a_tint1.png");
-			grassblade_tex1 = new Image("lib/img/tilesets/individual/grass_blade1.png");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 	//	Debug grass
 	//	GameBase.getMap().createTallGrass(0, new Rectangle(0, 0, 3000, 2000), 15000);
 	//	GameBase.getMap().createTallGrass(0, new Rectangle(0, 0, 3000, 2000), 15000);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		
 		sparktest.init(0.2f, 90, 45, 1, "Fire");
 		Overlay_fog.init();
-	//	Overlay_color.setColor(Overlay_color.MURKY01, 1);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+		Overlay_color.setColor(Overlay_color.FOREST01);
 		
-		TiledMap map = GameBase.getMap().getData();
-		int groupID = map.getObjectGroupID("grass");
-		for(int i = 0; i < map.getObjectCount(groupID); i++) {
-			GameBase.getMap().createTallGrass(0, map.getObjectX(groupID, i), map.getObjectY(groupID, i));
-		}
-		
-		sparktest.init(5f, 90, 45, 10, "Fire");
-		Detail_fog_overlay.init();
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+		overlayImages[2] = ImageLoader.getByPath("lib/img/overlay/shadow01.png");
+		overlayImages[3] = ImageLoader.getByPath("lib/img/overlay/shadow02.png");
 	}
 	
 	/**
@@ -199,15 +144,8 @@ public class GraphicsManager {
 				g.setDrawMode(Graphics.MODE_ALPHA_BLEND);
 			}
 			renderMap(g);
-<<<<<<< HEAD
 		}
 		g.setDrawMode(Graphics.MODE_NORMAL);
-=======
-
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 
 		
@@ -220,8 +158,6 @@ public class GraphicsManager {
 			renderDebugMap(g);
 
 		if(debug) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			g.setColor(Color.gray);
 			for(Object s : EntityManager.getPlayer().getNearbyTiles().values().toArray()) {
 				g.draw((Shape)s);
@@ -250,20 +186,6 @@ public class GraphicsManager {
 			g.setColor(Color.white);
 			
 			
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			for(Shape r : GameBase.getMap().getNearbyObstacles(
-					EntityManager.getPlayer().tilepos.x, EntityManager.getPlayer().tilepos.y)) {
-				if(r != null) {
-					g.draw(r);
-				}
-			}
-			
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		//	AIManager.renderNodeMap(g);		
 			for(Entity e : EntityManager.entityTable)
 				if(e.getCurrentPath() != null) {
@@ -272,7 +194,7 @@ public class GraphicsManager {
 		}
 		
 
-		if(ControlManager.mouseButtonClicked(ControlManager.mousePrimary)) {
+	/*	if(ControlManager.mouseButtonClicked(ControlManager.mousePrimary)) {
 			for(int c = 0; c < 5; c++) {
 				EntityManager.spawn(
 					new Coin(
@@ -304,7 +226,8 @@ public class GraphicsManager {
 					);
 			}
 		}
-		
+	*/	
+	
 		if(debug) {
 			Entity_player player = EntityManager.getPlayer();
 			g.draw(new Circle(player.getX(), player.getY(), player.getBounds().getBoundingCircleRadius()+4));
@@ -323,8 +246,6 @@ public class GraphicsManager {
 			//	System.out.println("ID: "+(GameBase.getZone().getData().getTileId(tileX, tileY, 2)));
 			}
 			
-<<<<<<< HEAD
-<<<<<<< HEAD
 			g.drawRect(Util.toWorldX(ControlManager.getMouseX() - 8),  Util.toWorldY(ControlManager.getMouseY() - 8), 16, 16);
 			
 
@@ -353,35 +274,6 @@ public class GraphicsManager {
 						particle_system_magic.getEmitter(particle_system_magic.getEmitterCount()-1).setPos(Util.toWorldX(ControlManager.getMouseX()), Util.toWorldY(ControlManager.getMouseY()));
 					}
 					AudioManager.playSound("large_explosion", 3f, 1f);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		//	g.drawRect(Util.toWorldX(ControlManager.getMouseX() - 8),  Util.toWorldY(ControlManager.getMouseY() - 8), 16, 16);
-
-			if(ControlManager.mouseButtonClicked(ControlManager.mousePrimary)) {
-				/*
-				for(int i = 0; i < 5; i++) {
-					particle_system_smoke.addEmitter(new Emitter_Smoke_ContinuousMed());
-					((main.particles.ParticleEmitter)particle_system_smoke.getEmitter(particle_system_smoke.getEmitterCount()-1)).setPos(Util.toWorldX(ControlManager.getMouseX()), Util.toWorldY(ControlManager.getMouseY()));
-				}
-				for(int i = 0; i < 5; i++) {
-					particle_system_fire.addEmitter(new Emitter_FireMed());
-					((main.particles.ParticleEmitter)particle_system_fire.getEmitter(particle_system_fire.getEmitterCount()-1)).setPos(Util.toWorldX(ControlManager.getMouseX()), Util.toWorldY(ControlManager.getMouseY()));
-				}
-				*/
-
-				sparktest.createSparksAt(new Vector2f(Util.toWorldX(ControlManager.getMouseX()), Util.toWorldY(ControlManager.getMouseY())), 100);
-			}
-			
-			if(ControlManager.mouseButtonClicked(ControlManager.mouseSecondary)) {
-				System.out.println("clicky");
-				for(int i = 0; i < 5; i++) {
-					particle_system_magic.addEmitter(new Emitter_Magic_BurstSmall());
-					((main.particles.ParticleEmitter)particle_system_magic.getEmitter(particle_system_magic.getEmitterCount()-1)).setPos(Util.toWorldX(ControlManager.getMouseX()), Util.toWorldY(ControlManager.getMouseY()));
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				}
 			}
 		}
@@ -390,36 +282,12 @@ public class GraphicsManager {
 	//		((main.particles.ParticleEmitter)particle_system_magic.getEmitter(i)).setPos(ControlManager.getMouseX(), ControlManager.getMouseY());
 	//	}
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		if(GameBase.mapRendering) {
-			for(ArrayList<Detail_grassblade_med> grass_group : GameBase.getMap().getTallGrass()) {
-				for(Detail_grassblade_med grass_blade : grass_group)
-					if(grass_blade.y <= EntityManager.getPlayer().getY()) 
-						grass_blade.draw();
-			}
-		}
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		renderEntities(g);
 
 		if(GameBase.mapRendering) { 
 			for(ArrayList<Detail_grassblade_med> grass_group : GameBase.getMap().getTallGrass()) {
 				for(Detail_grassblade_med grass_blade : grass_group)
-<<<<<<< HEAD
-<<<<<<< HEAD
 					grass_blade.draw();
-=======
-					if(grass_blade.y >= EntityManager.getPlayer().getY()) 
-						grass_blade.draw();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-					if(grass_blade.y >= EntityManager.getPlayer().getY()) 
-						grass_blade.draw();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			}
 		}
 
@@ -434,12 +302,11 @@ public class GraphicsManager {
 		particle_system_fire.render();
 		particle_system_magic.render();
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
 		for(EnvObject env : EnvObject.envTable) {
 		//	System.out.println(env.getID());
 			submitToQueue(env.getImg(), env.getX()+env.imgOffset.x, env.getY()+env.imgOffset.y, env.getY()+32);
 		}
+		
 		
 
 		if(debug) {
@@ -462,19 +329,38 @@ public class GraphicsManager {
 			g.drawString(stringsToDraw.get(pos), pos.x, pos.y);
 		}
 		stringsToDraw.clear();
-		g.setColor(oldColor);
-		g.setFont(oldFont);
 		
 		finalRender(g);
-		
 
 		g.translate(Camera.getAnchorX(), Camera.getAnchorY());
 		GameBase.getMap().renderLast(0, 0);
-
+		
 		Overlay_fog.update();
 		Overlay_fog.render();
+
 		Overlay_color.update();
 		Overlay_color.render(g);
+		
+	
+		if(redFlashVal > 0f)
+			redFlashVal -= ControlManager.getDelta() * 0.001f;
+		else
+			redFlashVal = 0f;
+		
+		g.setColor(new Color(1f, 0f, 0f, redFlashVal));
+		g.fillRect(0, 0, width, height);
+	//	System.out.println(redFlashVal);
+
+		g.setColor(oldColor);
+		g.setFont(oldFont);
+		
+		if(ScreenMessage.current != null) {
+			g.setColor(new Color(0.8f, 0.8f, 0.8f, ScreenMessage.current.fadeAmt));
+			g.setFont(FontLoader.getFont("JUNISRG_", 14));
+			g.setAntiAlias(true);
+			g.drawString(ScreenMessage.current.text, width/2 - g.getFont().getWidth(ScreenMessage.current.text)/2, height/2 + 32);
+			g.setAntiAlias(false);
+		}
 
 		//Stamina bar
 		float staminaFraction = EntityManager.getPlayer().getStaminaFraction();
@@ -487,29 +373,6 @@ public class GraphicsManager {
 		g.setLineWidth(3f);
 		g.drawRect(17,  497, 205, 16);
 		g.setLineWidth(1f);
-=======
-		
-
-		g.translate(Camera.getAnchorX(), Camera.getAnchorY());
-=======
-		
-
-		g.translate(Camera.getAnchorX(), Camera.getAnchorY());
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-
-		Detail_fog_overlay.update();
-		Detail_fog_overlay.render();
-
-		//Stamina bar
-		g.setColor(Color.white);
-		g.drawRect(18, 498, 204, 14);
-		g.drawRect(20, 500, 200 * EntityManager.getPlayer().getStaminaFraction(), 10);
-		g.setColor(new Color(0f, 0.5f, 0f, 0.5f));
-		g.fillRect(21, 501, 198 * EntityManager.getPlayer().getStaminaFraction(), 8);
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 		//Health bar
 		float healthFraction = EntityManager.getPlayer().getHealth()/EntityManager.getPlayer().getTotalHealth();
@@ -518,23 +381,28 @@ public class GraphicsManager {
 		g.drawRect(20, 530, 200 * healthFraction, 10);
 		g.setColor(new Color(0.5f, 0f, 0f, 0.5f));
 		g.fillRect(21, 531, 198 * healthFraction, 8);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		//Money
 		g.drawImage(ImageLoader.getSheet("lib/img/item/coin/gold.png").getSprite(0,  0), 20, 460, new Color(1f, 1f, 1f, 0.7f));
 		g.setFont(FontLoader.getFont("JUNIB___", 18f));
 		g.setColor(new Color(0f, 0f, 0f, 0.6f));
 		g.drawString(""+EntityManager.getPlayer().getMoney(), 38, 455);
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
+		
+		for(int i = 0; i < overlayImages.length; i++) {
+			Image img = overlayImages[i];
+			if(img != null) {
+				g.drawImage(img,  0, 0, new Color(1f, 1f, 1f, overlayAlphas[i]));
+			}
+		}
+
+		fade();	
+		g.setColor(new Color(0f, 0f, 0f, fadeVal));
+		g.fillRect(0, 0, GameBase.getWidth(), GameBase.getHeight());
+
 		g.setColor(oldCol);
 		g.setFont(oldFont);
 		g.clearWorldClip();
-		
 		
 		if(ControlManager.keyPressed(Keyboard.KEY_F2)) {
 			
@@ -594,6 +462,10 @@ public class GraphicsManager {
 		}
 	}
 	
+	public static void redFlash() {
+		redFlashVal = 0.7f;
+	}
+	
 	public static void submitToQueue(RenderCandidate rc) {
 		renderQueue.add(rc);
 	}
@@ -621,7 +493,6 @@ public class GraphicsManager {
 	
 	public static void renderEntities(Graphics g) {
 		for(int i = 0; i < EntityManager.getTableLength(); i++) {
-<<<<<<< HEAD
 			Color oldCol = g.getColor();
 			if(EntityManager.getByIndex(i) instanceof Entity_mobile) {
 				Entity_mobile curEnt = (Entity_mobile)EntityManager.getByIndex(i);
@@ -670,53 +541,16 @@ public class GraphicsManager {
 				}
 			}
 			g.setColor(oldCol);
-=======
-			Entity curEnt = EntityManager.getByIndex(i);
-			if(curEnt.getImg() == null) continue;
-			
-			if(curEnt instanceof Entity_player) {
-				curEnt = (Entity_player)curEnt;
-			} else if(curEnt instanceof Entity_mobile) {
-				curEnt = (Entity_mobile)curEnt;
-			}
-			
-			float z;
-			
-			if(curEnt instanceof Entity_mobile) {
-				z = ((Entity_mobile) curEnt).getZ();
-			} else z = 0;
-			
-			if(debug) 
-				g.draw(curEnt.getBounds());
-			
-			float x = curEnt.getX() - curEnt.getImg().getWidth()/2, y = curEnt.getY() - curEnt.getImg().getHeight()/2;
-			
-			g.setColor(new Color(0, 0, 0, 0.4f));
-			g.fillOval(curEnt.getBounds().getCenterX() -15 , curEnt.getBounds().getCenterY() + curEnt.getImgOffsetY() + z + 10, 30, 8);
-			
-			curEnt.drawFgEffects();
-			g.drawImage(curEnt.getImg(), (int)x + curEnt.getImgOffsetX(), (int)y + curEnt.getImgOffsetY());
-			curEnt.drawBgEffects();
-			
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		}
 	}
 	
 
 	public static void renderMap(Graphics g) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		GameBase.getMap().render(0,0);//-Math.round(Camera.getAnchorX()), -Math.round(Camera.getAnchorY()));
 	}
 	
 	public static void renderDebugMap(Graphics g) {
 		GameBase.getMap().renderDebug(g);
-=======
-		GameBase.getMap().render(-(int)Camera.getAnchorX(), -(int)Camera.getAnchorY());
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		GameBase.getMap().render(-(int)Camera.getAnchorX(), -(int)Camera.getAnchorY());
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	
@@ -774,24 +608,29 @@ public class GraphicsManager {
 		fadeMode = mode;
 	}
 	
+	public static void setFadeVal(float val) {
+		fadeVal = val;
+	}
+	
 	/**
 	 * Update overlay alpha to obscure screen
 	 */
 	public static void fade() {
-		float fadeIncrement = ControlManager.getDelta() * 0.1f;
+		float fadeIncrement = ControlManager.getDelta() * 0.001f;
 		if(fadeMode) {
-			if(overlayCol.getAlpha() > 0 - fadeIncrement)
-				overlayCol = new Color(overlayCol.getRed(), overlayCol.getGreen(), overlayCol.getBlue(), overlayCol.getAlpha() - fadeIncrement);
+			if(fadeVal >= 0f - fadeIncrement)
+				fadeVal -= fadeIncrement;
 			else
-				overlayCol = new Color(overlayCol.getRed(), overlayCol.getGreen(), overlayCol.getBlue(), 0);
+				fadeVal = 0;
 				
 		}
 		else {
-			if(overlayCol.getAlpha() < 255 + fadeIncrement)
-				overlayCol = new Color(overlayCol.getRed(), overlayCol.getGreen(), overlayCol.getBlue(), overlayCol.getAlpha() + fadeIncrement);
+			if(fadeVal < 1f + fadeIncrement)
+				fadeVal += fadeIncrement;
 			else
-				overlayCol = new Color(overlayCol.getRed(), overlayCol.getGreen(), overlayCol.getBlue(), 255);
+				fadeVal = 1f;
 		}
+	//	System.out.println(overlayCol.a);
 	}
 	
 	public static void fadeToggle() {

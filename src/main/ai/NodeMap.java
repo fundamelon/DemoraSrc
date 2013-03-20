@@ -7,10 +7,6 @@ import main.GameBase;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
-<<<<<<< HEAD
-=======
-import org.newdawn.slick.geom.Circle;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import org.newdawn.slick.geom.Rectangle;
 
 public class NodeMap implements Cloneable {
@@ -18,10 +14,7 @@ public class NodeMap implements Cloneable {
 	private int width, height, interval;
 	private Node[][] map;
 	
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public Object clone() {
 		try {
 			return super.clone();
@@ -73,23 +66,11 @@ public class NodeMap implements Cloneable {
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				//Only render if visible
-<<<<<<< HEAD
-<<<<<<< HEAD:src/demora/src/main/ai/NodeMap.java
 				if(!main.Camera.getVisibleArea().contains((x) * interval + interval/2, (y) * interval + interval/2)) continue;
-=======
-				if(!main.Camera.getVisibleArea().contains((x) * interval + 16, (y) * interval + 16)) continue;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9:src/demora/src/main/pathfinding/NodeMap.java
 				
 				Color oldColor = g.getColor();
 				g.setColor(map[x][y].isBlocked() ? Color.red : Color.white);
 				g.draw(new Rectangle((x) * interval + interval/2, (y) * interval + interval/2, 3, 3));
-=======
-				if(!main.Camera.getVisibleArea().contains((x) * interval + 16, (y) * interval + 16)) continue;
-				
-				Color oldColor = g.getColor();
-				g.setColor(map[x][y].isBlocked() ? Color.red : Color.white);
-				g.draw(new Rectangle((x) * interval + 16, (y) * interval + 16, 3, 3));
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				g.setColor(oldColor);
 			}
 		}

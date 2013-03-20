@@ -8,6 +8,7 @@ import main.gui.Panel;
 public class Event {
 	public static final int GAME_QUIT = 0;
 	public static final int GAME_START = 1;
+	public static final int GAME_RESUME = 2;
 	
 	public static final int OPEN_MAINMENU = 10;
 	public static final int OPEN_LOADMENU = 11;
@@ -23,6 +24,7 @@ public class Event {
 	public static final int SETTINGS_TOGGLE_VSYNC = 120;
 	public static final int SETTINGS_TOGGLE_FULLSCREEN = 121;
 	public static final int SETTINGS_SET_SFX_VOL = 122;
+	public static final int SETTINGS_SET_GAMMA = 123;
 	
 	public static final int DEBUG_TOGGLE_MAPRENDERING = 200;
 	public static final int DEBUG_TOGGLE_GRAPHICS = 201;
@@ -51,18 +53,26 @@ public class Event {
 			case GAME_START:
 				GameBase.viewMode = GameBase.VIEW_WORLD;
 				GameBase.menuVisible = false;
-				if(!GameBase.getMap().getFilepath().equals(GameBase.getCurrentMap())) {
-					try {
-						GameBase.loadMap(GameBase.getCurrentMap());
-					} catch (SlickException e) {
-						e.printStackTrace();
-					}
+				String mapname = (String)value;
+				try {
+					GameBase.loadMap(mapname);
+				} catch (SlickException e) {
+					System.out.println("Failed to load map: "+mapname);
+					e.printStackTrace();
 				}
 				break;
-				
+			
+			case GAME_RESUME: 
+				GameBase.viewMode = GameBase.VIEW_WORLD;
+				GameBase.menuVisible = false;
+				break;
+			
 			//Menu controls.
 			case OPEN_MAINMENU:
 				GameBase.viewMode = GameBase.VIEW_MENU;
+				break;
+			case OPEN_LOADMENU:
+				GUIManager.setMenuPanel(Panel.PRESET_LOADGAME);
 				break;
 			case OPEN_OPTIONS_MAIN:
 				GUIManager.setMenuPanel(Panel.PRESET_OPTIONS);
@@ -95,6 +105,10 @@ public class Event {
 				
 			case SETTINGS_SET_SFX_VOL:
 				AudioManager.setSFXVol((Float)value);
+				break;
+				
+			case SETTINGS_SET_GAMMA:
+				GameBase.gamma = (Float)value;
 				break;
 				
 			//Triggers

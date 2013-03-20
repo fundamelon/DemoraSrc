@@ -10,13 +10,7 @@ public class Button implements Clickable{
 	private Rectangle bounds;
 	private int eventKey;
 	private String text = "";
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private String type = "button";
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	private boolean status;
 	private boolean prevStatus;
 	private boolean mouseEntered;
@@ -27,6 +21,7 @@ public class Button implements Clickable{
 	private boolean toggle = false;
 	private boolean visible = true;
 	private boolean locked = false;
+	private Object value = null;
 	
 	private String name;
 	public int id;
@@ -54,17 +49,11 @@ public class Button implements Clickable{
 		this.eventKey = eventKey;
 		this.text = text;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
-	public Button(int newId, String text, float x, float y, float width, float height, int eventKey, String tags) {
+	public Button(int newId, String text, float x, float y, float width, float height, int eventKey, Object nVal) {
 		this(newId, text, x, y, width, height, eventKey);
-		type += " " + tags;
+		value = nVal;
 	}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 	public void update() {
 		if(mouseHover() != mouseOver) {
@@ -95,6 +84,10 @@ public class Button implements Clickable{
 		return status;
 	}
 	
+	public Object getValue() {
+		return value;
+	}
+	
 	public boolean isLocked() {
 		return locked;
 	}
@@ -104,7 +97,7 @@ public class Button implements Clickable{
 	public void lock(boolean a) {locked = a;}
 	
 	public boolean mouseClick() {
-		return mouseHover() && ControlManager.mouseButtonClicked(ControlManager.mousePrimary);
+		return !GUIManager.clicklock && mouseHover() && ControlManager.mouseButtonClicked(ControlManager.mousePrimary);
 	}
 	
 	public boolean mouseRelease() {
@@ -149,22 +142,6 @@ public class Button implements Clickable{
 
 	public void setToggleMode(boolean mode) {
 		toggle = mode;		
-	}
-	
-	public String getText() {
-		return text;
-	}
-	
-	public void setText(String text) {
-		this.text = text;
-	}
-	
-	public String getText() {
-		return text;
-	}
-	
-	public void setText(String text) {
-		this.text = text;
 	}
 	
 	public String getText() {

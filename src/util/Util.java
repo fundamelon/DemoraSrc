@@ -1,17 +1,11 @@
 package util;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.lwjgl.util.vector.*;
 import org.newdawn.slick.geom.Shape;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import org.newdawn.slick.geom.Transform;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import org.newdawn.slick.geom.Transform;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import main.Camera;
 import main.entity.Entity;
 
@@ -83,8 +77,6 @@ public class Util {
 	public static float toWorldY(float oy) {
 		return oy + Camera.getAnchorY();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	public static float getDistance(Shape a, Shape b) {
 		return (float)Math.sqrt(Math.pow(b.getX()-a.getX(), 2) + Math.pow(b.getY()-a.getY(), 2));
@@ -97,9 +89,27 @@ public class Util {
 	public static String getFilename(String path) {
 		return path.substring(path.lastIndexOf("\\")+1, path.lastIndexOf("."));
 	}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+	
+	public static ArrayList<String> findFiles(String dir, String filetype) {
+		ArrayList<String> out = new ArrayList<String>();
+		try {
+			dirlist(dir, out, filetype);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
 
+	public static void dirlist(String name, ArrayList<String> out, String filetype) throws IOException {
+		File dir = new File(name);
+		String[] children = dir.list();
+		if(dir.isFile() && (name.toLowerCase().endsWith(filetype))) {
+			String filename = dir.getPath().substring(dir.getPath().lastIndexOf("\\")+1, dir.getPath().lastIndexOf("."));
+			out.add(dir.getPath());
+		} else if(dir.isDirectory()) {
+			for(int i = 0; i < children.length; i++) {
+				dirlist(name + "/" + children[i], out, filetype);
+			}
+		}
+	}
 }

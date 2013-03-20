@@ -14,6 +14,8 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import util.Util;
+
 public class ImageLoader {
 	
 	public static ArrayList<String> filenames = new ArrayList<String>();
@@ -54,7 +56,8 @@ public class ImageLoader {
 
 	public static void loadImages() {
 		try {
-			dirlist("lib/img/");
+			filenames = Util.findFiles("lib/img/", "png");
+			filenames.addAll(Util.findFiles("lib/img/", "tga"));
 		} catch(Exception e) {
 			System.out.println("Failed to scan sound directory");
 		}
@@ -74,19 +77,6 @@ public class ImageLoader {
 		}
 		if(failiures < 0) {
 			System.out.println("Failed to load "+failiures+" sound files.");
-		}
-	}
-
-	public static void dirlist(String name) throws IOException {
-		File dir = new File(name);
-		String[] children = dir.list();
-		if(dir.isFile() && (dir.getPath().endsWith(".png") || dir.getPath().endsWith(".tga"))) {
-			filenames.add(dir.getPath());
-		} else if(dir.isDirectory()) {
-			if(dir.getPath().endsWith("screenshots")) return;
-			for(int i = 0; i < children.length; i++) {
-				dirlist(name + "/" + children[i]);
-			}
 		}
 	}
 }

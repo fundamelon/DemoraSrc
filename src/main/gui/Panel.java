@@ -8,20 +8,23 @@ import java.util.ArrayList;
 
 import main.Event;
 import main.GameBase;
+import main.graphics.FontLoader;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
+import util.Util;
+
 public class Panel {
 	public static final int PRESET_MAIN = 0;
-<<<<<<< HEAD
 	public static final int PRESET_INGAME = 1;
 	public static final int PRESET_OPTIONS = 2;
 	public static final int PRESET_CONTROLS = 3;
 	public static final int PRESET_GRAPHICS = 4;
 	public static final int PRESET_DEBUG = 5;
+	public static final int PRESET_LOADGAME = 6;
 	private int currentID = -1;
 	
 	private ArrayList<GUIObject> items = new ArrayList<GUIObject>();
@@ -30,41 +33,18 @@ public class Panel {
 	public static Font Title01;
 	public static Font Title02;
 	public static Font Label01;
-=======
-	public static final int PRESET_OPTIONS = 1;
-	private int preset;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	@SuppressWarnings("deprecation")
 	public static void init() {
 		try {
 
-			TitleMain = new TrueTypeFont(
-						java.awt.Font.createFont(
-								java.awt.Font.TRUETYPE_FONT, 
-								new BufferedInputStream(new FileInputStream("lib/font/old-english-fonts/SAXON.ttf"))).deriveFont(60f), 
-								true);
+			TitleMain = FontLoader.getFont("SAXON", 60f);
 			
-			Title01 = new TrueTypeFont(
-						java.awt.Font.createFont(
-								java.awt.Font.TRUETYPE_FONT, 
-								new BufferedInputStream(new FileInputStream(GameBase.pathPrefix+"lib/font/RomanUncialModern/RomanUncialModern.ttf"))).deriveFont(40f), 
-								true);
+			Title01 = FontLoader.getFont("RomanUncialModern", 40f);
 
-			Title02 = new TrueTypeFont(
-						java.awt.Font.createFont(
-								java.awt.Font.TRUETYPE_FONT, 
-								new BufferedInputStream(new FileInputStream(GameBase.pathPrefix+"lib/font/old-english-fonts/JUNIMRG_.ttf"))).deriveFont(20f), 
-								true);
+			Title02 = FontLoader.getFont("JUNIMRG_", 20f);
 
-			Label01 = new TrueTypeFont(
-						java.awt.Font.createFont(
-								java.awt.Font.TRUETYPE_FONT, 
-								new BufferedInputStream(new FileInputStream(GameBase.pathPrefix+"lib/font/old-english-fonts/JUNIMRG_.ttf"))).deriveFont(20f), 
-								true);
+			Label01 = FontLoader.getFont("JUNIMRG_", 20f);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,9 +61,10 @@ public class Panel {
 		switch(preset)
 		{
 		case PRESET_MAIN:
-<<<<<<< HEAD
-<<<<<<< HEAD
 			createMainMenu();
+			break;
+		case PRESET_LOADGAME:
+			createGameSelection();
 			break;
 		case PRESET_INGAME:
 			createIngameMenu();
@@ -158,28 +139,11 @@ public class Panel {
 						GUIManager.screenMidY - 25, 
 						200, 
 						50,
-						Event.GAME_START
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-			items.add(	
-				new Button(	
-					items.size(), 
-					"START GAME",
-					GUIManager.screenMidX - 100, 
-					GUIManager.screenMidY - 25, 
-					200, 
-					50,
-					Event.GAME_START
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+						Event.OPEN_LOADMENU
 				));
 		
 		items.add(
 				new Button(
-<<<<<<< HEAD
 						items.size(),
 						"Options",
 						GUIManager.screenMidX - 100,
@@ -210,7 +174,7 @@ public class Panel {
 						GUIManager.screenMidY - 75, 
 						200, 
 						50,
-						Event.GAME_START
+						Event.GAME_RESUME
 				));
 		
 		items.add(	
@@ -244,6 +208,35 @@ public class Panel {
 						200, 
 						50,
 						Event.GAME_QUIT
+		));
+	}
+	
+	public void createGameSelection() {
+		ArrayList<String> maps = Util.findFiles("lib/map", "tmx");
+		for(int i = 0; i < maps.size(); i++) {
+			String s = maps.get(i);
+			items.add(
+					new Button(
+							items.size(),
+							s,
+							GUIManager.screenMidX - 150,
+							GUIManager.screenMidY - 100 + 40*i,
+							300,
+							30,
+							Event.GAME_START,
+							s
+			));
+		}
+
+		items.add(
+				new Button(
+						items.size(),
+						"Back",
+						GUIManager.screenMidX + 175,
+						GUIManager.screenMidY + 145,
+						100,
+						40,
+						Event.SETTINGS_CANCEL
 		));
 	}
 	
@@ -294,33 +287,8 @@ public class Panel {
 							110,
 							30,
 							Event.OPEN_OPTIONS_DEBUG
-=======
-					items.size(),
-					"OPTIONS",
-					GUIManager.screenMidX - 100,
-					GUIManager.screenMidY + 50,
-					200,
-					50,
-					Event.OPEN_OPTIONS
-			));
-			
-			items.add(	
-				new Button(	
-					items.size(), 
-					"QUIT",
-					GUIManager.screenMidX - 100, 
-					GUIManager.screenMidY + 125, 
-					200, 
-					50,
-					Event.GAME_QUIT
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			));
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		//------------
 		//Bottom buttons
@@ -345,12 +313,6 @@ public class Panel {
 						40,
 						Event.SETTINGS_CANCEL
 		));
-=======
-		this.preset = preset;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		this.preset = preset;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public void createOptionsMenu() {
@@ -365,6 +327,30 @@ public class Panel {
 						Color.black,
 						Title01,
 						"center"
+		));
+		
+		items.add(
+				new Label(
+						items.size(),
+						"SFX volume",
+						GUIManager.screenMidX - 00, 
+						GUIManager.screenMidY - 125, 
+						Color.black,
+						Title02,
+						"left"
+		));
+
+		items.add(	
+				new Slider(	
+						items.size(), 
+						"Audio level",
+						GUIManager.screenMidX + 128, 
+						GUIManager.screenMidY - 120, 
+						128, 
+						0f,
+						1f,
+						main.AudioManager.sfx_vol,
+						Event.SETTINGS_SET_SFX_VOL
 		));
 		
 	}
@@ -418,6 +404,30 @@ public class Panel {
 						120, 
 						40,
 						Event.SETTINGS_TOGGLE_FULLSCREEN
+		));
+		
+		items.add(
+				new Label(
+						items.size(),
+						"Brightness",
+						GUIManager.screenMidX - 00, 
+						GUIManager.screenMidY - 125, 
+						Color.black,
+						Title02,
+						"left"
+		));
+
+		items.add(	
+				new Slider(	
+						items.size(), 
+						"Brightness",
+						GUIManager.screenMidX + 128, 
+						GUIManager.screenMidY - 120, 
+						128, 
+						0f,
+						1f,
+						main.GameBase.gamma,
+						Event.SETTINGS_SET_GAMMA
 		));
 	}
 	
@@ -500,13 +510,5 @@ public class Panel {
 						40,
 						Event.DEBUG_TOGGLE_TEXT
 		));
-	}
-
-	public int getPreset() {
-		return preset;
-	}
-
-	public int getPreset() {
-		return preset;
 	}
 }

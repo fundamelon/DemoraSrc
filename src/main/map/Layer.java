@@ -5,32 +5,18 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.GraphicsManager;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
-=======
-import org.newdawn.slick.SlickException;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import org.newdawn.slick.SlickException;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import org.newdawn.slick.util.Log;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import util.Transition;
 
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 /**
  * A layer of tiles on the map
  *
@@ -69,16 +55,10 @@ public class Layer {
 	/** The height of this layer */
 	public int height;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public float opacity = 1f;
 	public boolean toggleFade = true;
-	public Transition opacitySlider = new Transition(1000f, 0f, 1000);
+	public Transition opacitySlider = new Transition(10000f, 0f, 1000);
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/** the properties of this layer */
 	public Properties props;
 	
@@ -94,15 +74,7 @@ public class Layer {
 		name = element.getAttribute("name");
 		width = Integer.parseInt(element.getAttribute("width"));
 		height = Integer.parseInt(element.getAttribute("height"));
-<<<<<<< HEAD
-<<<<<<< HEAD
 		data = new int[width][height][4];
-=======
-		data = new int[width][height][3];
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		data = new int[width][height][3];
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 		// now read the layer properties
 		Element propsElement = (Element) element.getElementsByTagName("properties").item(0);
@@ -152,13 +124,7 @@ public class Layer {
 	                        }
 	                        data[x][y][2] = tileId;
                         }
-<<<<<<< HEAD
-<<<<<<< HEAD
                         data[x][y][3] = -1;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
                     }
                 }
 			} catch (IOException e) {
@@ -223,16 +189,17 @@ public class Layer {
 	 * @param mapTileHeight the tile height specified in the map file
 	 */
 	public void render(int x,int y,int sx,int sy,int width, int ty,boolean lineByLine, int mapTileWidth, int mapTileHeight) {
+		int cx, cy;
+		cx = (int)((main.Camera.getX()-400)/16);
+		cy = (int)((main.Camera.getY()-300)/16);
+	//	System.out.println(cx+", "+cy);
+		int cw = Math.round(main.GameBase.getWidth()/16);
+		int ch = Math.round(main.GameBase.getHeight()/16);
+		int camX = -Math.round(main.Camera.getAnchorX());
+		int camY = -Math.round(main.Camera.getAnchorY());
+		opacity = opacitySlider.getCurVal()/10000f;
 		for (int tileset=0;tileset<map.getTileSetCount();tileset++) {
 			TileSet set = null;
-<<<<<<< HEAD
-<<<<<<< HEAD
-			int cx, cy;
-			cx = (int)((main.Camera.getX()-400)/16);
-			cy = (int)((main.Camera.getY()-300)/16);
-		//	System.out.println(cx+", "+cy);
-			int cw = Math.round(main.GameBase.getWidth()/16);
-			int ch = Math.round(main.GameBase.getHeight()/16);
 			for (int tx=0;tx<width;tx++) {
 				//World clip
 				if ((sx+tx < cx) || (sy+ty < cy)) {
@@ -243,14 +210,6 @@ public class Layer {
 				}
 
 				//Layer clip
-=======
-			
-			for (int tx=0;tx<width;tx++) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-			
-			for (int tx=0;tx<width;tx++) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				if ((sx+tx < 0) || (sy+ty < 0)) {
 					continue;
 				}
@@ -261,15 +220,7 @@ public class Layer {
 				if (data[sx+tx][sy+ty][0] == tileset) {
 					if (set == null) {
 						set = map.getTileSet(tileset);
-<<<<<<< HEAD
-<<<<<<< HEAD
 					//	set.tiles.startUse();
-=======
-						set.tiles.startUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-						set.tiles.startUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 					}
 					
 					int sheetX = set.getTileX(data[sx+tx][sy+ty][1]);
@@ -278,8 +229,6 @@ public class Layer {
 					int tileOffsetY = set.tileHeight - mapTileHeight;
 					
 					
-<<<<<<< HEAD
-<<<<<<< HEAD
 					if(this.index == map.getLayerIndex("structures_wall")) {
 						//Recalculate tile height
 						if(data[sx+tx][sy+ty][3] == -1) {
@@ -293,59 +242,31 @@ public class Layer {
 						GraphicsManager.submitToQueue(set.tiles.getSubImage(sheetX, sheetY), x+(tx*set.tileWidth), y+(ty*set.tileHeight), y+(ty*set.tileHeight)+data[sx+tx][sy+ty][3]+set.tileHeight);
 					} else {
 						set.tiles.getSubImage(sheetX,  sheetY).draw(
-								x+(tx*mapTileWidth) + -Math.round(main.Camera.getAnchorX()), 
-								y+(ty*mapTileHeight)-tileOffsetY + -Math.round(main.Camera.getAnchorY()), 
-								new Color(1f, 1f, 1f, opacitySlider.getCurVal()/1000f));
+								x+(tx*mapTileWidth) + camX, 
+								y+(ty*mapTileHeight)-tileOffsetY + camY, 
+								new Color(1f, 1f, 1f, opacity));
 					//	set.tiles.renderInUse(
 					//			x+(tx*mapTileWidth) + -Math.round(main.Camera.getAnchorX()), 
 					//			y+(ty*mapTileHeight)-tileOffsetY + -Math.round(main.Camera.getAnchorY()), sheetX, sheetY);
 					}
-=======
-				//	if(!main.GameBase.shading)
-						set.tiles.renderInUse(x+(tx*set.tileWidth), y+(ty*set.tileHeight), sheetX, sheetY);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-				//	if(!main.GameBase.shading)
-						set.tiles.renderInUse(x+(tx*set.tileWidth), y+(ty*set.tileHeight), sheetX, sheetY);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-				//	else 
-				//		set.tiles.renderInUseShaded(x+(tx*mapTileWidth), y+(ty*mapTileHeight)-tileOffsetY, sheetX, sheetY);
-					
 				}
 			}
-			
+			/*
 			if (lineByLine) {
 				if (set != null) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 				//	set.tiles.endUse();
-=======
-					set.tiles.endUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-					set.tiles.endUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 					set = null;
 				}
 				map.renderedLine(ty, ty+sy, index);
 			}
 			
 			if (set != null) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			//	set.tiles.endUse();
-=======
-				set.tiles.endUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-				set.tiles.endUse();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			}
+			*/
 		}
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void setOpacity(float nOp) {
 		opacity = nOp;
 	}
@@ -357,21 +278,17 @@ public class Layer {
 	}
 	
 	public void fadeIn() {
-	//	System.out.println("["+opacitySlider.getCurVal()+"] Fading in");
+		System.out.println("["+opacitySlider.getCurVal()+"] Fading in");
 		opacitySlider.setToForward();
 		opacitySlider.start();
 	}
 	
 	public void fadeOut() {
-	//	System.out.println("["+opacitySlider.getCurVal()+"] Fading out");
+		System.out.println("["+opacitySlider.getCurVal()+"] Fading out");
 		opacitySlider.setToReverse();
 		opacitySlider.start();
 	}
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/**
 	 * Decode a Base64 string as encoded by TilED
 	 * 

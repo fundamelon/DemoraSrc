@@ -74,29 +74,12 @@ public class Camera {
 					nx += 5 * (Math.random() - 0.5f);
 					ny += 5 * (Math.random() - 0.5f);
 				}
-<<<<<<< HEAD
-<<<<<<< HEAD
 				pos.x = Util.clamp(pos.x + nx, GameBase.getWidth()/2, (GameBase.getMap().getWidthPixels()) - GameBase.getWidth()/2);
 				pos.y = Util.clamp(pos.y + ny, GameBase.getHeight()/2, (GameBase.getMap().getHeightPixels()) - GameBase.getHeight()/2);
 			} catch(ArithmeticException e){}
 		}
 		lockToPlayer = false;
 		visibleArea.setLocation(getAnchorX(), getAnchorY());
-=======
-				pos.x = Util.clamp(pos.x + nx, GameBase.getWidth()/2, (GameBase.getMap().getWidth()) * 32 - GameBase.getWidth()/2);
-				pos.y = Util.clamp(pos.y + ny, GameBase.getHeight()/2, (GameBase.getMap().getHeight()) * 32 - GameBase.getHeight()/2);
-			} catch(ArithmeticException e){}
-		}
-		lockToPlayer = false;
-=======
-				pos.x = Util.clamp(pos.x + nx, GameBase.getWidth()/2, (GameBase.getMap().getWidth()) * 32 - GameBase.getWidth()/2);
-				pos.y = Util.clamp(pos.y + ny, GameBase.getHeight()/2, (GameBase.getMap().getHeight()) * 32 - GameBase.getHeight()/2);
-			} catch(ArithmeticException e){}
-		}
-		lockToPlayer = false;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		visibleArea.setLocation(getAnchorX()-32, getAnchorY()-32);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public static Rectangle getVisibleArea() {

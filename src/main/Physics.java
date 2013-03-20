@@ -1,14 +1,6 @@
 package main;
 
 import org.newdawn.slick.geom.*;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import org.lwjgl.util.vector.*;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import org.lwjgl.util.vector.*;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;
@@ -93,25 +85,10 @@ public class Physics {
 				overlap.x = 0;
 			}
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-
-		
-
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	//	System.out.println("Overlap x= "+overlap.x+" y= "+overlap.y);
 		
 		projection = overlap;
 		projection.scale(-1f);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		return projection;
 	}
@@ -211,12 +188,6 @@ public class Physics {
 		projection.y = ((int)(projection.y*1000000)) / 1000000;
 
 	//	System.out.println("Projection x= "+projection.x+" y= "+projection.y);
-=======
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		return projection;
 	}
 }

@@ -114,7 +114,8 @@ public class GameMap {
 	
 	public void render(int x, int y) {
 		for(int i = 0; i < mapData.getLayerCount(); i++) {
-			if(i != mapData.getLayerIndex("env") && 
+			if(		i != mapData.getLayerIndex("spawn") && 
+					i != mapData.getLayerIndex("env") && 
 					i!=mapData.getLayerIndex("structures_roof") && 
 					i!=mapData.getLayerIndex("structures_top") && 
 					i!=mapData.getLayerIndex("structures_util") && 
@@ -142,6 +143,17 @@ public class GameMap {
 			}
 			it.next();
 		}
+	}
+	
+	public Vector2f playerSpawnPos() {
+		Vector2f out = null;
+		int index = mapData.getObjectGroupID("spawn");
+		if(index != -1 )
+			if(mapData.getObjectCount(index) > 0)
+				out = new Vector2f(mapData.getObjectX(index, 0) + 64, mapData.getObjectY(index, 0) - 18);
+			else System.out.println("No spawn points found");
+		else System.out.println("No spawn layer defined");
+		return out;
 	}
 	
 	public int getTileAtX(float ox) {
@@ -374,7 +386,9 @@ public class GameMap {
 	
 	public int collisionType(int x, int y) {
 		if(mapData.getLayerIndex("util") == -1) return -1;
-		return Integer.parseInt(mapData.getTileProperty(getData().getTileId(x, y, mapData.getLayerIndex("util")), "collision", "0"));
+		if(x >= 0 && y >= 0 && x < mapData.getWidth() && y < mapData.getHeight())
+			return Integer.parseInt(mapData.getTileProperty(getData().getTileId(x, y, mapData.getLayerIndex("util")), "collision", "0"));
+		else return 0;
 	}
 
 	public int getPropertyValue(int x, int y, String layer, String name) {

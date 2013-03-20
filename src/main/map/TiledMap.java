@@ -128,16 +128,8 @@ public class TiledMap {
 	 * @return The location of the tile images specified as a resource reference prefix
 	 */
 	public String getTilesLocation() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	//	return tilesLocation;
 		return "lib";
-=======
-		return tilesLocation;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		return tilesLocation;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	/**
@@ -386,16 +378,10 @@ public class TiledMap {
 		}
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void setLayerOpacity(int index, float nOp) {
 		((Layer)layers.get(index)).opacity = nOp;
 	}
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/**
 	 * Retrieve a count of the number of layers available
 	 * 
@@ -420,13 +406,7 @@ public class TiledMap {
 			factory.setValidating(false);
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			builder.setEntityResolver(new EntityResolver() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 				@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				public InputSource resolveEntity(String publicId,
 						String systemId) throws SAXException, IOException {					
 					return new InputSource(new ByteArrayInputStream(new byte[0]));
@@ -571,13 +551,7 @@ public class TiledMap {
 	 * @param layer The layer being rendered
 	 */
 	protected void renderedLine(int visualY, int mapY,int layer) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	/**

@@ -9,16 +9,10 @@ public class Transition {
 	String curveType = "linear";
 	boolean paused = true;
 	boolean reverse = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	Color curCol = null;
 	Color ocol, tcol;
 	Transition red, green, blue, alpha;
 	String type;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	String[] validCurveTypes = new String[]{
 		"linear", "single", "double", "hold"
@@ -42,8 +36,6 @@ public class Transition {
 		curVal = a;
 		startTime = System.nanoTime();
 		TransitionManager.addToTable(this);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		type = "value";
 	}
 	
@@ -61,10 +53,6 @@ public class Transition {
 		ocol = a;
 		tcol = b;
 		type = "color";
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	/**
@@ -74,8 +62,6 @@ public class Transition {
 	public void update(float delta) {
 		if(paused) return;
 		curTime = System.nanoTime();
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		if(type.equals("value")) {
 			//Exponential, smooth transition.
@@ -92,7 +78,7 @@ public class Transition {
 				else 
 					curVal = Math.max(curVal - (delta / t) * (b-a), a);
 			}
-			curVal = Math.round(curVal * 10000) / 10000;
+			curVal = Math.round(curVal * 10000000) / 10000000;
 			
 			if(curVal == b) paused = true;
 			//	System.out.println("a: "+a+" b: "+b+" curVal: "+curVal);
@@ -103,48 +89,6 @@ public class Transition {
 				paused = true;
 			}
 		}
-=======
-		
-		//Exponential, smooth transition.
-		if(curveType == "single") {
-			if(!reverse)
-				curVal = Math.min(((curTime - startTime) / t) * (b - a), b);
-			else
-				curVal = Math.max(((curTime - startTime) / t) * (a - b), a);
-		} 
-		//Linear transition
-		else if(curveType == "linear") {
-			if(!reverse)
-				curVal = Math.min(curVal + (delta / t) * (b-a), b);
-			else 
-				curVal = Math.max(curVal - (delta / t) * (b-a), a);
-		}
-		curVal = Math.round(curVal * 10000) / 10000;
-		
-		if(curVal == (float)b) paused = true;
-	//	System.out.println("a: "+a+" b: "+b+" curVal: "+curVal);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		
-		//Exponential, smooth transition.
-		if(curveType == "single") {
-			if(!reverse)
-				curVal = Math.min(((curTime - startTime) / t) * (b - a), b);
-			else
-				curVal = Math.max(((curTime - startTime) / t) * (a - b), a);
-		} 
-		//Linear transition
-		else if(curveType == "linear") {
-			if(!reverse)
-				curVal = Math.min(curVal + (delta / t) * (b-a), b);
-			else 
-				curVal = Math.max(curVal - (delta / t) * (b-a), a);
-		}
-		curVal = Math.round(curVal * 10000) / 10000;
-		
-		if(curVal == (float)b) paused = true;
-	//	System.out.println("a: "+a+" b: "+b+" curVal: "+curVal);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	/**
@@ -155,16 +99,10 @@ public class Transition {
 		return curVal;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public Color getCurCol() {
 		return curCol;
 	}
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/**	Start animation	*/
 	public void start() {
 		paused = false;
@@ -177,15 +115,7 @@ public class Transition {
 	
 	/**	Is it at the target value?	*/
 	public boolean finished() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if(curVal == b) return true;
-=======
-		if(curVal == (float)b) return true;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		if(curVal == (float)b) return true;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+		if((!reverse && curVal == b) || (reverse && curVal == a)) return true;
 		else return false;
 	}
 	

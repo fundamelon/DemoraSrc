@@ -17,15 +17,7 @@ public interface Entity {
 	public float getAng();
 	
 	public void init();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void init(float nx, float ny, boolean tilewise);
-=======
-	public void init(int nx, int ny, boolean tilewise);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public void init(int nx, int ny, boolean tilewise);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public void update();
 	
@@ -49,29 +41,17 @@ public interface Entity {
 	
 	public float getHealth();
 	public float getTotalHealth();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	public void damage(float damage);
 	public void damage(float damage, Entity attacker);
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 	public boolean castShadows();
 	
 	public Path getCurrentPath();
 	public boolean isJumping();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	public boolean isDead();
 	
 	public boolean initialized();
 	public void kill();
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 }

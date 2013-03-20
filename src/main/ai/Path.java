@@ -3,15 +3,7 @@ package main.ai;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
-<<<<<<< HEAD
 import main.AIManager;
-=======
-import org.newdawn.slick.Font;
-import org.newdawn.slick.TrueTypeFont;
-
-import main.AIManager;
-import main.GameBase;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 public class Path {
 	public ArrayList<Node> steps = new ArrayList<Node>(1);

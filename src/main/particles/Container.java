@@ -197,8 +197,6 @@ public class Container implements Entity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 	@Override
 	public boolean isDead() {
@@ -229,8 +227,4 @@ public class Container implements Entity {
 		// TODO Auto-generated method stub
 		return true;
 	}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 }

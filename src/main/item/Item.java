@@ -20,8 +20,6 @@ public abstract class Item implements Entity{
 	//unique items get an ID
 	//otherwise ID is zero for generics
 	public final int ID;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public int variant = 0;
 	public Rectangle bounds;
 	public Animation cur_anim;
@@ -36,10 +34,6 @@ public abstract class Item implements Entity{
 	
 	public static ArrayList<Item> itemTable = new ArrayList<Item>();
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	public Item(int nID) {
 		ID = nID;

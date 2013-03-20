@@ -23,6 +23,9 @@ public class GUIManager {
 	@SuppressWarnings("deprecation")
 	public static Font menuFont01 = new TrueTypeFont(new java.awt.Font("Lucida Console", 1, 12), true);
 	
+	//to prevent two buttons clicked at once
+	public static boolean clicklock = false;
+	
 	public static int curPanel = 0;
 	
 	public static Transition fade;
@@ -57,9 +60,8 @@ public class GUIManager {
 	}
 	
 	public static void render(Graphics g, float delta) {
+		clicklock = false;
 		Color oldCol = g.getColor();
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Font oldFont = g.getFont();
 		
 		g.setFont(menuFont01);
@@ -82,58 +84,12 @@ public class GUIManager {
 					renderItem(g, (Button)item);
 				}
 				
+				if(item.getType().contains("slider")) {
+					renderItem(g, (Slider)item);
+				}
+				
 				if(item.getType().contains("label")) {
 					renderItem(g, (Label)item);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		for(Panel p : panels) {
-			if(p.getPreset() == Panel.PRESET_MAIN) {
-				if(GameBase.isInGame()) {
-					g.setColor(Color.black);
-					p.getItem(0).setText("RESUME");
-				}
-				else {
-					g.setColor(Color.white);
-				}
-				g.drawString("Demora v."+GameBase.getVersion(), 256, 50);
-			}
-			for(int i = 0; i < p.getItems().size(); i++) {
-				Clickable item = p.getItem(i);
-				if(item.isVisible()) {
-					if(main.GameBase.debug_menu) {
-						if(item.mouseClick()) {
-							System.out.println(item.getName() + ": clicked");
-						}
-						
-						if(item.mouseExit()) {
-							System.out.println(item.getName() + ": exited");
-						} else if(item.mouseEnter()) {
-							System.out.println(item.getName() + ": entered");
-						}
-					}
-					
-					
-					
-					Color oldColor = g.getColor();
-					if(item.mouseDown()) {
-						g.setColor(Color.darkGray);
-						Event.fire(item.getEventKey());
-					} else if(item.mouseHover()) {
-						g.setColor(Color.gray);
-					} else {
-						g.setColor(Color.white);
-					}
-					
-					g.fill(item.getBounds());
-					
-					g.setColor(Color.black);
-					g.drawString(item.getText(), 
-							item.getBounds().getCenterX() - item.getText().length() * 3.3f, 
-							item.getBounds().getCenterY() - 5);
-					
-					g.setColor(oldColor);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				}
 			}
 		}
@@ -166,7 +122,8 @@ public class GUIManager {
 			
 			if(item.mouseClick()) {
 				AudioManager.playSound("click01", 2f, 1f);
-				Event.fire(item.getEventKey());
+				Event.fire(item.getEventKey(), item.getValue());
+				clicklock = true;
 			}
 		} else {
 			g.setColor(Color.darkGray);
@@ -192,6 +149,87 @@ public class GUIManager {
 		g.drawString(item.getText(), 
 				(int)item.getBounds().getCenterX() - g.getFont().getWidth(item.getText())/2, 
 				(int)item.getBounds().getCenterY() - g.getFont().getHeight(item.getText())/2);
+		
+		g.setColor(oldCol);
+		
+	}
+	
+	public static void renderItem(Graphics g, Slider item) {
+		if(main.GameBase.debug_menu) {
+			if(item.mouseClick()) {
+				System.out.println(item.getName() + ": clicked");
+			}
+			
+			if(item.mouseExit()) {
+				System.out.println(item.getName() + ": exited");
+			} else if(item.mouseEnter()) {
+				System.out.println(item.getName() + ": entered");
+			}
+		}
+		Color oldCol = g.getColor();
+
+	/*	g.setColor(gray02);
+		g.fillRoundRect(
+				item.getBounds().getX()-2 + 32, 
+				item.getBounds().getY()-2 + 24, 
+				item.getBounds().getWidth() - 64, 
+				8, 
+				5);
+		
+	*/	g.setColor(gray01);
+		g.setLineWidth(3);
+		g.setAntiAlias(true);
+		g.drawRoundRect(
+				item.getBounds().getX()-2 + 32, 
+				item.getBounds().getY()-2 + 22, 
+				item.getBounds().getWidth() - 64, 
+				8, 
+				5);
+		g.setLineWidth(2);
+
+		
+	
+		if(!item.isLocked()) {
+			if(item.mouseDown()) {
+				g.setColor(gray01);
+			} else if(item.mouseHover()) {
+				g.setColor(gray02);
+			} else {
+				g.setColor(gray03);
+			}
+			
+			if(item.mouseClick()) {
+				clicklock = true;
+			} 
+			
+			if(item.getStatus()) {
+				Event.fire(item.getEventKey(), item.getValue());
+			}
+			
+			if(item.mouseRelease() && item.mouseHover()) {
+				AudioManager.playSound("click01", 2f, 1f);
+			}
+		} else {
+			g.setColor(Color.darkGray);
+		}
+		
+		float sliderX = item.getBounds().getX() + 32 + item.getValue() * (item.getBounds().getWidth()-64) - 8 ;
+		float sliderY = item.getBounds().getY() + 16;
+		float sliderSize = 16;
+		
+		g.fillRoundRect(sliderX, sliderY,sliderSize, sliderSize,8);
+
+		g.setColor(Color.black);
+		g.drawRoundRect(sliderX, sliderY,sliderSize, sliderSize,8);
+		
+		g.setAntiAlias(false);
+		g.setLineWidth(1);
+		
+		g.setColor(Color.black);
+	//	g.setFont(Panel.Label01);
+	//	g.drawString(item.getText(), 
+	//			(int)item.getBounds().getCenterX() - g.getFont().getWidth(item.getText())/2, 
+	//			(int)item.getBounds().getCenterY() - g.getFont().getHeight(item.getText())/2);
 		
 		g.setColor(oldCol);
 		

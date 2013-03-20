@@ -4,38 +4,14 @@ import java.util.ArrayList;
 
 import main.ControlManager;
 import main.GameBase;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-import main.entity.EntityManager;
-
-import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.TrueTypeFont;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 public class Lagmeter {
 	private static boolean inView = false;
 	private static boolean toggle = false;
 	private static ArrayList<java.lang.Float> deltaSet =  new ArrayList<java.lang.Float>(256);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	private static Font meterFont = new TrueTypeFont(new java.awt.Font("Courier", 10, 10), true);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	private static Font meterFont = new TrueTypeFont(new java.awt.Font("Courier", 10, 10), true);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	//Colors
 	private static Color red = new Color(0.6f, 0f, 0f, 0.3f);
@@ -114,8 +90,6 @@ public class Lagmeter {
 		g.setColor(white);
 		g.drawLine(w - 260, h - deltaSetAvg * 4, w - 255, h - deltaSetAvg * 4);
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Font oldFont = g.getFont();
 		g.setFont(GameBase.debugFont);
 		g.setColor(gray4);
@@ -124,19 +98,6 @@ public class Lagmeter {
 		g.drawString("  fps: "+GameBase.getFPS(), (int)w-250, (int)h-175);
 
 		g.setFont(oldFont);
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		g.setFont(meterFont);
-		g.setColor(gray4);
-		g.drawString("delta: "+ControlManager.getDelta(), w-250, h-195);
-		g.drawString("  avg: "+Math.round(deltaSetAvg), w-250, h - 185);
-		g.drawString("  fps: "+GameBase.getFPS(), w-250, h-175);
-		
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		g.translate(0, -offsetY);
 	}
 	

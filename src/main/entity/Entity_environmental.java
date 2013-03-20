@@ -99,15 +99,7 @@ public class Entity_environmental implements Entity {
 	}
 
 	@Override
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void init(float nx, float ny, boolean tilewise) {
-=======
-	public void init(int nx, int ny, boolean tilewise) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public void init(int nx, int ny, boolean tilewise) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		// TODO Auto-generated method stub
 		
 	}
@@ -130,13 +122,7 @@ public class Entity_environmental implements Entity {
 		return false;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean isMoving() {
 		return false;
 	}
@@ -170,8 +156,6 @@ public class Entity_environmental implements Entity {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 	@Override
 	public boolean isDead() {
@@ -199,9 +183,5 @@ public class Entity_environmental implements Entity {
 		// TODO Auto-generated method stub
 		
 	}
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 }

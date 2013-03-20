@@ -6,11 +6,11 @@ import util.Transition;
 
 public class Overlay_color {
 	public static final Color NORMAL = new Color(1f, 1f, 1f);
-	public static final Color MURKY01 = new Color(0.15f, 0.15f, 0.3f);
+	public static final Color FOREST01 = new Color(1.20f, 1.21f, 1.23f);
 	
 	
 
-	public static Color col = MURKY01;
+	public static Color col = FOREST01;
 	public static Transition colAnim;
 	
 	public static void update() {
@@ -25,8 +25,8 @@ public class Overlay_color {
 		else
 			g.setColor(col);
 		
-		g.setDrawMode(Graphics.MODE_ALPHA_BLEND | Graphics.MODE_COLOR_MULTIPLY);
-	//	g.fill(new Rectangle(0, 0, GameBase.getWidth()+1, GameBase.getHeight()+1));
+		g.setDrawMode(Graphics.MODE_COLOR_MULTIPLY);
+		g.fillRect(0, 0, main.GameBase.getWidth()+1, main.GameBase.getHeight()+1);
 		g.setColor(oldCol);
 		g.setDrawMode(Graphics.MODE_NORMAL);
 	}

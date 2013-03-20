@@ -1,22 +1,7 @@
 package main.particles;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import org.newdawn.slick.Image;
 
 public class Emitter_Magic_BurstSmall extends ParticleEmitter {
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-import main.ControlManager;
-
-import org.newdawn.slick.Image;
-import org.newdawn.slick.particles.*;
-
-public class Emitter_Magic_BurstSmall implements ParticleEmitter {
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/** The x coordinate of the center of the fire effect */
 	private int x;
 	/** The y coordinate of the center of the fire effect */
@@ -65,13 +50,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#update(org.newdawn.slick.particles.ParticleSystem, int)
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void update(ParticleSystem system, int delta) {
 		timer -= delta;
 		variation_timer += delta;
@@ -97,13 +76,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#updateParticle(org.newdawn.slick.particles.Particle, int)
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void updateParticle(Particle particle, int delta) {
 		if (particle.getLife() > 600) {
 			particle.adjustSize((float)(-0.4f*Math.random()) * delta);
@@ -116,13 +89,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 		particle.adjustVelocity(0,  c*-0.19f);
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void setPos(float nx, float ny) {
 		x = (int)nx;
 		y = (int)ny;
@@ -131,13 +98,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#isEnabled()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean isEnabled() {
 		return true;
 	}
@@ -145,26 +106,14 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#setEnabled(boolean)
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void setEnabled(boolean enabled) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#completed()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean completed() {
 		return false;
 	}
@@ -172,13 +121,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#useAdditive()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean useAdditive() {
 		return false;
 	}
@@ -186,13 +129,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#getImage()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public Image getImage() {
 		return null;
 	}
@@ -200,13 +137,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#usePoints(org.newdawn.slick.particles.ParticleSystem)
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean usePoints(ParticleSystem system) {
 		return false;
 	}
@@ -214,13 +145,7 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#isOriented()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public boolean isOriented() {
 		return false;
 	}
@@ -228,36 +153,18 @@ public class Emitter_Magic_BurstSmall implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#wrapUp()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void wrapUp() {
 	}
 
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#resetState()
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public void resetState() {
 	}
 
 	@Override
-=======
-	public void resetState() {
-	}
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-	public void resetState() {
-	}
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public float getBrightness() {
 		// TODO Auto-generated method stub
 		return 0;

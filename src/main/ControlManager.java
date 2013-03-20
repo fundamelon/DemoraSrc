@@ -1,32 +1,16 @@
 package main;
 
 import main.entity.*;
-<<<<<<< HEAD
-<<<<<<< HEAD
+import main.graphics.ScreenMessage;
 import main.map.*;
-import main.map.Overlay_fog;
 
 import org.lwjgl.LWJGLException;
-=======
-import main.map.Detail_fog_overlay;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import main.map.Detail_fog_overlay;
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.*;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.SlickException;
-
-import util.Lagmeter;
-import util.Util;
-
-import util.Lagmeter;
-import util.Util;
 
 import util.Lagmeter;
 import util.Util;
@@ -109,73 +93,15 @@ public class ControlManager {
 			GameBase.toggleIngameMenu();
 		//	System.exit(0);
 		}
+
+		if(keyPressed(Keyboard.KEY_3)){
+			ScreenMessage.current = new ScreenMessage("The forest seems endless...");
+		}
 		
 		if(keyPressed(Keyboard.KEY_4)){
 			AudioManager.playSound("Valley", 1f, 1f, false, false);
 		}
 
-<<<<<<< HEAD
-=======
-		
-		if(keyPressed(Keyboard.KEY_F)) {
-		 	GameBase.setDisplayMode(800, 600, !Display.isFullscreen());
-		}
-		if(keyPressed(Keyboard.KEY_V)) {
-		  GameBase.vsync = !GameBase.vsync;
-		  Display.setVSyncEnabled(GameBase.vsync);
-		}
-
-		if(keyStatus(Keyboard.KEY_O)) {
-			EntityManager.getPlayer().followPath();
-		}
-		if(keyStatus(Keyboard.KEY_P)) {
-			int tileX = GameBase.getMap().getTileAtX(EntityManager.getPlayer().getBounds().getCenterX());
-			int tileY = GameBase.getMap().getTileAtY(EntityManager.getPlayer().getBounds().getCenterY());
-			main.ai.Node target = AIManager.getNodeMap().getNodeAt(
-					GameBase.getMap().getTileAtX(Util.toWorldX(ControlManager.getMouseX())), 
-					GameBase.getMap().getTileAtY(Util.toWorldY(ControlManager.getMouseY())));
-			if(target != null && !target.isBlocked())
-				EntityManager.getPlayer().setPath(target);
-		}
-
-		
-		if(keyPressed(Keyboard.KEY_ESCAPE)) {
-			GameBase.toggleIngameMenu();
-		//	System.exit(0);
-		}
-
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		
-		if(keyPressed(Keyboard.KEY_F)) {
-		 	GameBase.setDisplayMode(800, 600, !Display.isFullscreen());
-		}
-		if(keyPressed(Keyboard.KEY_V)) {
-		  GameBase.vsync = !GameBase.vsync;
-		  Display.setVSyncEnabled(GameBase.vsync);
-		}
-
-		if(keyStatus(Keyboard.KEY_O)) {
-			EntityManager.getPlayer().followPath();
-		}
-		if(keyStatus(Keyboard.KEY_P)) {
-			int tileX = GameBase.getMap().getTileAtX(EntityManager.getPlayer().getBounds().getCenterX());
-			int tileY = GameBase.getMap().getTileAtY(EntityManager.getPlayer().getBounds().getCenterY());
-			main.ai.Node target = AIManager.getNodeMap().getNodeAt(
-					GameBase.getMap().getTileAtX(Util.toWorldX(ControlManager.getMouseX())), 
-					GameBase.getMap().getTileAtY(Util.toWorldY(ControlManager.getMouseY())));
-			if(target != null && !target.isBlocked())
-				EntityManager.getPlayer().setPath(target);
-		}
-
-		
-		if(keyPressed(Keyboard.KEY_ESCAPE)) {
-			GameBase.toggleIngameMenu();
-		//	System.exit(0);
-		}
-
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		if(keyPressed(Keyboard.KEY_5)){
 			//refer to GraphicsManager
 		}
@@ -191,8 +117,6 @@ public class ControlManager {
 			Lagmeter.toggle();
 		}
 		if(keyPressed(Keyboard.KEY_9)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Overlay_fog.toggle();
 		}
 		if(keyPressed(Keyboard.KEY_0)){
@@ -206,9 +130,6 @@ public class ControlManager {
 		}
 		if(keyPressed(Keyboard.KEY_RBRACKET)){
 			((Door)EnvObject.getByID(0)).close();
-=======
-			Detail_fog_overlay.toggle();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		}
 		
 		if(keyPressed(Keyboard.KEY_BACKSLASH)) {
@@ -222,9 +143,6 @@ public class ControlManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-=======
-			Detail_fog_overlay.toggle();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		}
 		
 		if(EntityManager.playerSpawned)
@@ -284,8 +202,6 @@ public class ControlManager {
 		Entity_player player = EntityManager.getPlayer();
 		Vector2f newVel = new Vector2f(player.vel.x, player.vel.y);
 		boolean anyKeysPressed = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		//Get keys pressed.
 		if(!keyControlsDisabled) {
@@ -322,69 +238,6 @@ public class ControlManager {
 			}
 		}
 		
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-		//Get keys pressed.
-		if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-			newVel.y = newVel.y - 1;
-			anyKeysPressed = true;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_S)){
-			newVel.y = newVel.y + 1;
-			anyKeysPressed = true;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-			newVel.x = newVel.x + 1;
-			anyKeysPressed = true;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-			newVel.x = newVel.x - 1;
-			anyKeysPressed = true;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-			player.jump();
-		}
-		if(keyPressed(Keyboard.KEY_LSHIFT)) {
-			player.startSprint();
-		}
-		if(keyReleased(Keyboard.KEY_LSHIFT)) {
-			player.stopSprint();
-		}
-
-		//movement and movement speed controls.
-		/*
-		if(newVel.x == 0 && smoothTickX > 0)
-			smoothTickX-=0.001 * delta;
-		else if(newVel.x != 0 && smoothTickX<1)
-			smoothTickX+=0.001 * delta;
-		
-		if(newVel.y == 0 && smoothTickY > 0) 
-			smoothTickY-=0.001 * delta;
-		else if(newVel.y != 0 && smoothTickY<1)
-			smoothTickY+=0.001 * delta;
-		
-		//Reduce dx and dy by smoothing factors.
-	//	newVel = new Vector2f(newVel.x * smoothTickX, newVel.y * smoothTickY);
-		
-		//Reset smoothing if you're at a standstill.
-		if(!anyKeysPressed) {
-			smoothTickX = 0;
-			smoothTickY = 0;
-		}
-	//	DEBUG: System.out.println("Player asked to move by "+newVel.x+", "+newVel.y);
-		
-		if(!anyKeysPressed) {
-		//	System.out.println("No keys pressed to move player.");
-		}
-		
-		*/
-		
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		player.move(newVel);
 	}
 	
@@ -504,8 +357,6 @@ public class ControlManager {
 		return mouseButtonReleased[i];
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static void disableKeyControls() {
 		keyControlsDisabled = true;
 	}
@@ -514,10 +365,6 @@ public class ControlManager {
 		keyControlsDisabled = false;
 	}
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public static char getKeyN() {return KEY_MOVE_N;}
 	public static char getKeyS() {return KEY_MOVE_S;}
 	public static char getKeyE() {return KEY_MOVE_E;}

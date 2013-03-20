@@ -1,7 +1,5 @@
 package main;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -13,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.newdawn.slick.openal.*;
 import org.newdawn.slick.util.ResourceLoader;
+
+import util.Util;
 
 public class AudioManager {
 	public static ArrayList<String> filenames;
@@ -87,7 +87,7 @@ public class AudioManager {
 		}
 	}
 	
-	public static void playSound(String name, float pitch, float gain, boolean loop, boolean overlap) {
+	public static Audio getSound(String name) {
 		Audio sound = null;
 		if(sounds.containsKey(name)) {
 			sound = sounds.get(name);
@@ -98,6 +98,11 @@ public class AudioManager {
 			System.out.println("Invalid sound name");
 			sound = null;
 		}
+		return sound;
+	}
+	
+	public static void playSound(String name, float pitch, float gain, boolean loop, boolean overlap) {
+		Audio sound = getSound(name);
 		if(overlap) {
 			sound.playAsSoundEffect(pitch, gain * sfx_vol, loop);
 		} else if(!sound.isPlaying()) {
@@ -120,6 +125,12 @@ public class AudioManager {
 	public static void playSound(String name) {
 		playSound(name, 1f, 1f, false, true);
 	} 
+
+	public static void stopSound(String name) {
+		Audio sound = getSound(name);
+		if(sound != null)
+			sound.stop();
+	}
 	
 	public static void addAmbience(String name, float gain, float frequency) {
 		for(Ambience a : ambience)
@@ -144,7 +155,7 @@ public class AudioManager {
 	
 	public static void loadSounds() {
 		try {
-			dirlist("lib/sound/");
+			filenames = Util.findFiles("lib/sound/", "ogg");
 		} catch(Exception e) {
 			System.out.println("Failed to scan sound directory");
 		}
@@ -180,18 +191,6 @@ public class AudioManager {
 	public static void createGroup(String name) {
 		createGroup(name, name);
 	}
-	
-	public static void dirlist(String name) throws IOException {
-		File dir = new File(name);
-		String[] children = dir.list();
-		if(dir.isFile() && !dir.getPath().endsWith(".txt")) {
-			filenames.add(dir.getPath());
-		} else if(dir.isDirectory()) {
-			for(int i = 0; i < children.length; i++) {
-				dirlist(name + "/" + children[i]);
-			}
-		}
-	}
 }
 
 class Ambience {
@@ -204,32 +203,3 @@ class Ambience {
 		this.frequency = frequency;
 	}
 }
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-import org.lwjgl.openal.AL;
-import org.newdawn.slick.openal.*;
-import org.newdawn.slick.util.ResourceLoader;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-
-public class AudioManager {
-	public static Audio testEffect;
-	
-	public static void test() {
-		
-	}
-	
-	public static void main(String[] args) {
-		try {
-			new Sound("lib/sound/sfx/test/door_latch_open.ogg").play();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-}
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9

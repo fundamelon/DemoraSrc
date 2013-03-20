@@ -14,29 +14,18 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.particles.ParticleSystem;
 
 
 import main.*;
 import main.ai.Node;
 import main.ai.Path;
 import main.ai.Pathfinder_AStar;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.graphics.ImageLoader;
 import main.particles.*;
-=======
-import main.particles.Emitter_Dust_TrailSmall;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-import main.particles.Emitter_Dust_TrailSmall;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 @SuppressWarnings("all")
 public class Entity_player extends Entity_mobile implements Entity {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public static ParticleSystem ps_sprintdust;
 	
 	public int money = 0;
@@ -44,26 +33,12 @@ public class Entity_player extends Entity_mobile implements Entity {
 	public Entity_player() throws SlickException {
 		
 		ps_sprintdust = new ParticleSystem(ImageLoader.getByPath("lib/img/particle/smoke_01.tga"));
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public static org.newdawn.slick.particles.ParticleSystem ps_sprintdust;
-	
-	public Entity_player() throws SlickException {
-		
-		ps_sprintdust = new ParticleSystem(new Image("lib/img/particle/smoke_01.tga"));
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		ps_sprintdust.setPosition(0, 0);
 		ps_sprintdust.setBlendingMode(ParticleSystem.BLEND_COMBINE);
 		ps_sprintdust.addEmitter(new Emitter_Dust_TrailSmall(this.pos.x, this.pos.y));
 		ps_sprintdust.getEmitter(0).setEnabled(false);
 	
 		//Load up all textures and animations!
-<<<<<<< HEAD
-<<<<<<< HEAD
 		
 		TEX_FRONT = ImageLoader.getByPath("lib/img/char/plr_front_static.png");
 		TEX_BACK  = ImageLoader.getByPath("lib/img/char/plr_back_static.png");
@@ -85,25 +60,6 @@ public class Entity_player extends Entity_mobile implements Entity {
 				ImageLoader.getByPath("lib/img/char/girl_front_fall07.png"),
 				ImageLoader.getByPath("lib/img/char/girl_front_fall08.png")
 		};
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-		TEX_FRONT = new Image("lib/img/char/plr_front_static.png");
-		TEX_BACK  = new Image("lib/img/char/plr_back_static.png");
-		TEX_LEFT  = new Image("lib/img/char/plr_left_static.png");
-		TEX_RIGHT = new Image("lib/img/char/plr_right_static.png");
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-		TEX_JUMP_FRONT = new Image("lib/img/char/plr_front_run02.png");
-		TEX_JUMP_BACK  = new Image("lib/img/char/plr_back_run03.png");
-		TEX_JUMP_LEFT  = new Image("lib/img/char/plr_side_run02.png");
-		TEX_JUMP_RIGHT = new Image("lib/img/char/plr_side_run04.png");
-		
-		TEX_JUMP_FRONT = new Image("lib/img/char/plr_front_run02.png");
-		TEX_JUMP_BACK  = new Image("lib/img/char/plr_back_run03.png");
-		TEX_JUMP_LEFT  = new Image("lib/img/char/plr_side_run02.png");
-		TEX_JUMP_RIGHT = new Image("lib/img/char/plr_side_run04.png");
 		
 		TEX_RUN_FRONT = new Image[] {
 			ImageLoader.getByPath("lib/img/char/plr_front_run02.png"),
@@ -162,22 +118,10 @@ public class Entity_player extends Entity_mobile implements Entity {
 		velMult = 0.15f;
 		jumpForce = 0.3f;
 		
-<<<<<<< HEAD
 		attackDamage = new float[]{25, 10, 100};
 		
-<<<<<<< HEAD
 		name = "player";
 		bounds = new Rectangle(0, 0, 30, 14);
-=======
-		velMult = 0.15f;
-		
-		bounds = new Rectangle(0, 0, 30, 30);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		velMult = 0.15f;
-		
-		bounds = new Rectangle(0, 0, 30, 30);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	
 	}
 	
@@ -187,19 +131,18 @@ public class Entity_player extends Entity_mobile implements Entity {
 	 * @param ny - start pos y
 	 * @param tilewise - True means tiles, false means pixels.
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public void init(float nx, float ny, boolean tilewise) {
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	public void init(int nx, int ny, boolean tilewise) {
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		
-		pos.x = nx * (tilewise ? 1 : 32);
-		pos.y = ny * (tilewise ? 1 : 32);
-		pos.x = 64;
-		pos.y = 64;
+		Vector2f spawnPos = GameBase.getMap().playerSpawnPos();
+		if(GameBase.getMap().playerSpawnPos() != null) {
+			pos.x = spawnPos.x;
+			pos.y = spawnPos.y;
+			shadow_offset.y = 12;
+		} else {
+			pos.x = nx * (tilewise ? 1 : 32);
+			pos.y = ny * (tilewise ? 1 : 32);
+			pos.x = 64;
+			pos.y = 64;
+		}
 		super.init();
 		
 		System.out.println("ENT: player initialized");
@@ -251,15 +194,9 @@ public class Entity_player extends Entity_mobile implements Entity {
 		if(!isJumping()) {
 			vel.x *= 0;
 			vel.y *= 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		} else {
 			vel.x *= 0.0002 * ControlManager.getDelta();
 			vel.y *= 0.0002 * ControlManager.getDelta();
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		}
 		super.finalize();
 	}
@@ -267,29 +204,14 @@ public class Entity_player extends Entity_mobile implements Entity {
 	
 	
 	public void setPath(Node target) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		pathfinder.pathfind(AIManager.getNodeMap().getNodeAt(GameBase.getMap().getTilePosAt(pos.x, pos.y)), target);
-=======
-		pathfinder.pathfind(AIManager.getNodeMap().getNodeAt(GameBase.getMap().getTileAt(pos.x, pos.y)), target);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		pathfinder.pathfind(AIManager.getNodeMap().getNodeAt(GameBase.getMap().getTileAt(pos.x, pos.y)), target);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		currentPath = pathfinder.createPath();
 	}
 	
 	public Image getImg() {
 		img_offset_x = 0;
-<<<<<<< HEAD
 		img_offset_y = -40;
 		shadow_offset.scale(0);
-=======
-		img_offset_y = 0;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		if(isJumping()) {
 			img_offset_y -= pos.z;
 		}
@@ -355,8 +277,6 @@ public class Entity_player extends Entity_mobile implements Entity {
 	}
 	
 	public void jump() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if(!isJumping() && !isDead()) {
 			//TODO: speed up at jump start, perhaps only with a skill
 			this.vel.x *= 1.01f;
@@ -365,17 +285,6 @@ public class Entity_player extends Entity_mobile implements Entity {
 			if(Math.random() < 0.3) {
 				AudioManager.playSound("female_exert_grunt", 1f, 0.3f);
 			}
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		if(!isJumping()) {
-			this.vel.x *= 1.5f;
-			this.vel.y *= 1.5f;
-			this.vel.z += jumpForce;
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		}
 	}
 
@@ -385,22 +294,21 @@ public class Entity_player extends Entity_mobile implements Entity {
 		return 0;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public int getMoney() {return money;}
 	public void changeMoney(int amt) {money += amt;}
 	public void setMoney(int amt) {money = amt;}
 	
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public void drawFgEffects() {
 		ps_sprintdust.render();
 	}
 	
 	public void drawBgEffects() {
 		
+	}
+	
+	public void damage(float dmg, Entity attacker) {
+		GraphicsManager.redFlash();
+		super.damage(dmg, attacker);
 	}
 	
 

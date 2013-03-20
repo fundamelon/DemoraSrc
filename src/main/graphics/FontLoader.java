@@ -19,6 +19,8 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
+import util.Util;
+
 public class FontLoader {
 
 	//Paths of the .fnt and .png font components, mapped to font name
@@ -49,7 +51,7 @@ public class FontLoader {
 
 	public static void loadFonts() {
 		try {
-			dirlist("lib/font/");
+			filenames = Util.findFiles("lib/font/", "ttf");
 		} catch(Exception e) {
 			System.out.println("Failed to scan font directory");
 		}
@@ -79,19 +81,6 @@ public class FontLoader {
 	
 	public static TrueTypeFont createTTF(String name, float size) {
 		return new TrueTypeFont(fonts.get(name).deriveFont(size), true);
-	}
-
-	public static void dirlist(String name) throws IOException {
-		File dir = new File(name);
-		String[] children = dir.list();
-		if(dir.isFile() && (name.toLowerCase().endsWith("ttf"))) {
-			String filename = dir.getPath().substring(dir.getPath().lastIndexOf("\\")+1, dir.getPath().lastIndexOf("."));
-			filenames.add(dir.getPath());
-		} else if(dir.isDirectory()) {
-			for(int i = 0; i < children.length; i++) {
-				dirlist(name + "/" + children[i]);
-			}
-		}
 	}
 }
 

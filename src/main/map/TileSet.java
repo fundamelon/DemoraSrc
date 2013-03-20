@@ -67,16 +67,8 @@ public class TileSet {
 		
 		if ((source != null) && (!source.equals(""))) {
 			try {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			//	InputStream in = ResourceLoader.getResourceAsStream(map.getTilesLocation() + "/" + source);
 				InputStream in = ResourceLoader.getResourceAsStream("lib/" + source);
-=======
-				InputStream in = ResourceLoader.getResourceAsStream(map.getTilesLocation() + "/" + source);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-				InputStream in = ResourceLoader.getResourceAsStream(map.getTilesLocation() + "/" + source);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document doc = builder.parse(in);
 				Element docElement = doc.getDocumentElement();
@@ -119,16 +111,8 @@ public class TileSet {
 		}
 
 		if (loadImage) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			//Hacked override to access lib folder.
 			Image image = new Image("lib/"+ref.substring(3),false,Image.FILTER_NEAREST,trans);
-=======
-			Image image = new Image(map.getTilesLocation()+"/"+ref,false,Image.FILTER_NEAREST,trans);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-			Image image = new Image(map.getTilesLocation()+"/"+ref,false,Image.FILTER_NEAREST,trans);
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 			setTileSetImage(image);
 		}
 		

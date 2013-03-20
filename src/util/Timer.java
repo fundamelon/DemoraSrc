@@ -5,8 +5,6 @@ public class Timer {
 	private long startTime = 0;
 	private long curTime = 0;
 	private long limit = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private boolean running = false;
 	private boolean repeat = false;
 	private boolean override = false;
@@ -14,18 +12,11 @@ public class Timer {
 		this.name = name;
 		startTime = System.currentTimeMillis();
 		curTime = startTime;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-	private boolean running = true;
-	private boolean repeat = false;
-	public Timer(String name) {
-		this.name = name;
-		startTime = System.nanoTime();
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
+		TimerSet.addTimer(this);
+	}
+	
+	public Timer(String name, int time) {
+		this(name, (long)time);
 	}
 	
 	public Timer(String name, long time) {
@@ -38,9 +29,11 @@ public class Timer {
 		this.repeat = repeat;
 	}
 	
+	public Timer(String s, float t) {
+		this(s, (long)t);
+	}
+
 	public void update() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		if(running) curTime = System.currentTimeMillis();
 		if(completed()) {
 			if(!repeat) {
@@ -50,23 +43,11 @@ public class Timer {
 			}
 		}
 		
-=======
-		if(running) curTime = System.nanoTime();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		if(running) curTime = System.nanoTime();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}	
 	
 	public void start() {
 		running = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		override = false;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public void restart() {
@@ -79,16 +60,8 @@ public class Timer {
 	}
 	
 	public void reset() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		startTime = System.currentTimeMillis();
 		curTime = startTime;
-=======
-		startTime = curTime;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
-		startTime = curTime;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 	
 	public boolean isRunning() {
@@ -103,13 +76,15 @@ public class Timer {
 		return curTime - startTime;
 	}
 	
+	public long totalTime() {
+		return limit;
+	}
+	
 	public String getName() {
 		return name;
 	}
 	
 	public boolean completed() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		return timeElapsed() >= limit || override;
 	}
 
@@ -120,19 +95,5 @@ public class Timer {
 
 	public void setLength(int newLength) {
 		limit = newLength;
-=======
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-		if(!repeat) {
-			running = false;
-			return curTime >= startTime + limit;
-		} else {
-			reset();
-			return true;
-		}
-<<<<<<< HEAD
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	}
 }

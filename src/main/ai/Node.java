@@ -32,10 +32,7 @@ public class Node {
 	public void setBlocked(boolean nblocked) {blocked = nblocked;}
 	public void setVisited(boolean nvisited) {visited = nvisited;}
 	
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	public String toString() {
 		return "Node ["+x+", "+y+"] "+(blocked?"[obstruct]":"[free]");
 	}

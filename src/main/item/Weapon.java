@@ -1,13 +1,7 @@
 package main.item;
 
 import main.ai.Path;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import main.entity.Entity;
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -189,8 +183,6 @@ public class Weapon extends Item {
 		return false;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public boolean isDead() {
 		// TODO Auto-generated method stub
@@ -209,8 +201,4 @@ public class Weapon extends Item {
 		
 	}
 
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
-=======
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 }

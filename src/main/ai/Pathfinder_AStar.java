@@ -51,11 +51,7 @@ public class Pathfinder_AStar {
 		int maxDepth = 10000;
 		Node current = start, candidate = null;
 		
-<<<<<<< HEAD
 		Graphics g = GameBase.g;
-=======
-		Graphics g = new org.newdawn.slick.Graphics();
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		
 	//	System.out.println("AI: Pathfinding from "+start.toString()+" to "+goal.toString()+", max steps: "+maxDepth);
 		
@@ -145,7 +141,6 @@ public class Pathfinder_AStar {
 				System.out.println("\tPF: Pathfinding successful");
 		}
 		
-<<<<<<< HEAD
 		for(int i = 0; i < nodes.getSize(); i++) {
 			nodes.getNodeByID(i).setVisited(false);
 		}
@@ -153,12 +148,6 @@ public class Pathfinder_AStar {
 	}
 	
 	
-=======
-		for(int i = 0; i < nodes.getSize(); i++)
-			nodes.getNodeByID(i).setVisited(false);
-	}
-	
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 	/**Does a node exist at this location, and is it clear?
 	 * 
 	 * @param x
@@ -176,13 +165,8 @@ public class Pathfinder_AStar {
 	
 	public boolean isAdjacent(Node a, Node b) {
 		return (
-<<<<<<< HEAD
 			Math.round(Math.abs(a.getX() - b.getX())) <= 1 &&
 			Math.round(Math.abs(a.getY() - b.getY())) <= 1
-=======
-			Math.abs(a.getX() - b.getX()) <= 1 &&
-			Math.abs(a.getY() - b.getY()) <= 1
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		);
 	}
 	
@@ -193,11 +177,7 @@ public class Pathfinder_AStar {
 		float gy = goal.getY();
 		
 		float d = (float)Math.sqrt((gx-ox)*(gx-ox) + (gy-oy)*(gy-oy));
-<<<<<<< HEAD
 		float p = -0.5f;
-=======
-		float p = -0.9f;
->>>>>>> b3a3f1e0343578cd7b99790904c0228228d70ba9
 		return d * (1.0f + p);
 	}
 	
